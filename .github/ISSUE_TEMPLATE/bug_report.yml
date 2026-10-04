@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a reproducible application defect
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Please remove credentials, private data, account identifiers, and market-data exports from all logs and screenshots. Use the private security reporting link for vulnerabilities."
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include the expected behavior and the actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Use synthetic or public data where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python and Node versions, data-source setting, and relevant redacted logs.
+    validations:
+      required: true

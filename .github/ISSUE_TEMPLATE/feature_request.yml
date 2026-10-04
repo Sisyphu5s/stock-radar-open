@@ -1,0 +1,18 @@
+name: Feature request
+description: Propose an improvement to the public workbench
+title: "[Feature] "
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: Describe the research or workflow need and who it helps.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Include data-source and API implications if applicable.
+    validations:
+      required: true
