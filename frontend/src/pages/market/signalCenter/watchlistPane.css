@@ -1,0 +1,153 @@
+/* ===== 信号中心关注流左栏（WatchlistPane）局部样式 =====
+ * T-53 左右分栏双流：左栏=关注流（Splitter Pane / 窄屏 Drawer 复用），右栏=全市场信号流。
+ * 克制平面：无嵌套卡片 / 渐变；令牌一律 var(--sr-*)；涨跌 --sr-up/down（A股红涨绿跌）。 */
+
+/* 桌面 Splitter（SignalCenter 根）：左栏关注流 / 右栏信号流；flex 满高（同工作台 sr-wb-splitter） */
+.sr-signal-split {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+/* Splitter Pane 为 flex 裸 div：左栏内部滚动自理，防溢出 */
+.sr-signal-split .sr-wlp-pane {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* 左栏根：满高弹性列（头部固定 + 列表滚动；Drawer 内 height:100% 随 body 塌缩为内容高，
+ * 由 Drawer body overflow 兜底滚动，两种容器都可用） */
+.sr-wlp {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+}
+
+/* 顶部小头部：统计（关注 N · 今日新 X）+ 跳关注页按钮 */
+.sr-wlp-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 4px var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+}
+.sr-wlp-stats {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+.sr-wlp-goto {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 滚动列表 */
+.sr-wlp-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* 行（可点 → /stocks/:code）：两行式——名称/代码/现价涨跌 · 信号Tag/时点 */
+.sr-wlp-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-wlp-row:hover { background: var(--sr-hover-bg); }
+.sr-wlp-row:focus-visible {
+  outline: 2px solid var(--sr-accent);
+  outline-offset: -2px;
+}
+
+.sr-wlp-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+.sr-wlp-name {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
+}
+.sr-wlp-code {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+}
+/* 现价 + 涨跌（右对齐，tabular-nums 等宽） */
+.sr-wlp-quote {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.sr-wlp-price {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+}
+.sr-wlp-pct {
+  font-size: var(--sr-font-xs);
+  font-weight: 600;
+}
+/* 信号 Tag（前 2 + 折叠 N）与时点：同一行左右分布 */
+.sr-wlp-sigs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-width: 0;
+  flex: 1;
+}
+.sr-wlp-more {
+  border-radius: var(--sr-radius-tag);
+  font-weight: 600;
+  cursor: default;
+}
+.sr-wlp-moment {
+  flex-shrink: 0;
+  min-width: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+/* 加载 / 空态容器 */
+.sr-wlp-state,
+.sr-wlp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+}
+
+/* 窄屏入口按钮内关注计数 Badge（SignalStreamPanel 功能栏） */
+.sr-wlp-entry-badge {
+  border-radius: var(--sr-radius-tag);
+  font-weight: 600;
+}

@@ -1,0 +1,75 @@
+/* ============================================================
+   工作台多股 tab 条(T-55):顶部横向 tab,激活高亮(--sr-accent 顶条),
+   溢出横滚(HScroll 悬浮按钮),关闭按钮仅 hover 显现。
+   使用 --sr-* token,无渐变无卡套卡。
+   ============================================================ */
+
+.sr-wb-tabs {
+  flex-shrink: 0;
+  min-width: 0;
+  border-bottom: 1px solid var(--sr-border);
+  background: var(--sr-card-bg);
+}
+
+.sr-wb-tabs-inner {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 6px 8px 0;
+  min-width: 0;
+}
+
+.sr-wb-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  max-width: 220px;
+  min-width: 0;
+  padding: 5px 8px 7px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-2);
+}
+
+.sr-wb-tab:hover {
+  background: var(--sr-block-bg);
+  color: var(--sr-text-1);
+}
+
+.sr-wb-tab.is-active {
+  background: var(--sr-block-bg);
+  border-color: var(--sr-border);
+  color: var(--sr-text-1);
+  font-weight: 600;
+  box-shadow: inset 0 2px 0 var(--sr-accent);
+}
+
+.sr-wb-tab-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sr-wb-tab-code {
+  flex-shrink: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+
+/* 关闭按钮:默认低对比,tab hover / 自身 hover 时显现 */
+.sr-wb-tab-close {
+  flex-shrink: 0;
+  margin-left: 2px;
+  color: var(--sr-text-3);
+  opacity: 0.45;
+}
+
+.sr-wb-tab:hover .sr-wb-tab-close,
+.sr-wb-tab-close:hover {
+  opacity: 1;
+}

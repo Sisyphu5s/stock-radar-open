@@ -1,0 +1,102 @@
+/* ===== 移动端（<768）信号流卡片列表（MobileSignalList）局部样式 =====
+ * 来源:原 market/signals/inbox.css 拆分归位(T-41 私有 CSS 收敛 06 §6);
+ * 面板/摘要/筛选抽屉/排除弹层见 ../signalCenter/signalStreamPanel.css */
+
+/* 移动信号卡片列表 */
+.sr-inbox-mlist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.sr-inbox-mcard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: var(--sr-pad-lg) var(--sr-pad-xl);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-inbox-mcard:active { background: var(--sr-hover-bg); }
+.sr-inbox-mcard-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.sr-inbox-mcard-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.sr-inbox-mcard-name {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
+}
+.sr-inbox-mcard-code {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+}
+.sr-inbox-mcard-star {
+  flex-shrink: 0;
+  min-width: 40px;
+  min-height: 40px;
+  /* 星标统一行最左：向左延伸进卡片左内边距，右侧间距由 head 的 gap 承担 */
+  margin: -8px 0 -8px -6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sr-inbox-mcard-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.sr-inbox-mcard-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.sr-inbox-mcard-stat > em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--sr-text-2);
+}
+.sr-inbox-mcard-time {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-inbox-mcard-sigs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  min-width: 0;
+}
+.sr-inbox-mcard-more {
+  font-size: 10px;
+  line-height: 16px;
+  padding: 0 var(--sr-pad-xs);
+  border-radius: 4px;
+  flex-shrink: 0;
+}

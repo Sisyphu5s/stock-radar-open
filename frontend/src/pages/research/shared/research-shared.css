@@ -1,0 +1,162 @@
+/* ===== 研究域共享组件样式（ResearchFlowBar / ListInfinite / sticky 工具区） ===== */
+
+/* ===== 扁平面板（非 Card）：无卡套卡，统一圆角边框 =====
+   原定义于 validation/run-layout.css（仅 Backtest/FactorEvaluation import，冷启动直达
+   其他 tab 时详情抽屉三面板样式缺失）——提升至研究域共享层，由 FactorWorkbench（壳，恒挂载）import，
+   任何 tab 冷启动样式均完整。 */
+.sr-run-panel {
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  padding: var(--sr-pad-xl);
+}
+.sr-run-panel-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-sm);
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  margin-bottom: var(--sr-pad-lg);
+}
+
+/* ===== 统一流程条：数据集 → 发现(GP/Alpha101) → 评估 → 回测 → 因子库 ===== */
+.sr-flow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+}
+
+.sr-flow-steps {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.sr-flow-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sr-text-3);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color var(--sr-dur-fast), color var(--sr-dur-fast), background var(--sr-dur-fast);
+}
+
+.sr-flow-step:hover {
+  color: var(--sr-text-1);
+  border-color: var(--sr-border);
+}
+
+.sr-flow-step.is-past {
+  color: var(--sr-text-2);
+}
+
+.sr-flow-step.is-past:hover {
+  color: var(--sr-accent);
+}
+
+.sr-flow-step.is-active {
+  background: var(--sr-accent);
+  color: var(--sr-card-bg);
+  font-weight: 600;
+  cursor: default;
+}
+
+.sr-flow-arrow {
+  color: var(--sr-text-3);
+  font-size: 11px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* 发现视图切换（GP / Alpha101） */
+.sr-flow-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 2px;
+}
+
+/* 上下文胶囊（数据集 / 表达式 / 任务） */
+.sr-flow-ctx {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin-left: auto;
+  padding-left: 10px;
+  border-left: 1px solid var(--sr-border);
+}
+
+.sr-flow-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 220px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--sr-block-bg);
+  border: 1px solid var(--sr-border);
+  font-size: 11.5px;
+  color: var(--sr-text-2);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sr-flow-chip .sr-flow-chip-label {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--sr-text-3);
+}
+
+.sr-flow-chip .sr-flow-chip-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.sr-flow-chip-btn {
+  cursor: pointer;
+  transition: border-color var(--sr-dur-fast), color var(--sr-dur-fast);
+}
+
+.sr-flow-chip-btn:hover {
+  border-color: var(--sr-accent);
+  color: var(--sr-text-1);
+}
+
+/* ===== 无限滚动：已加载/总数 提示 ===== */
+.sr-list-inf-meta {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  text-align: center;
+  padding: 2px 0;
+}
+
+/* ===== 列表页 sticky 工具区（已合并至 layout.css 全局定义，避免双份） ===== */
+
+/* 窄屏工具区一行不换行（横向滚动） */
+@media (max-width: 768px) {
+  .sr-flow-ctx {
+    width: 100%;
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,40 @@
+/* ============================================================
+   关注提醒 launcher：可拖动铃铛按钮 + 未读徽标（Mantine Indicator）。
+   纯展示层；默认定位右下、copilot launcher 上方 48px（--sr-float-wl-launcher-offset），
+   拖动后由父级通过 style left/top 接管。全部令牌 var(--sr-*)。
+   z-index 分层见 styles/float-tokens.css（关注 launcher = copilot launcher + 1）。
+   ============================================================ */
+.sr-wl-launcher {
+  position: fixed;
+  right: var(--sr-float-edge);
+  bottom: calc(var(--sr-float-edge) + var(--sr-bottombar-h) + var(--sr-safe-bottom) + var(--sr-float-wl-launcher-offset));
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sr-card-bg);
+  color: var(--sr-accent);
+  border: 1px solid var(--sr-accent);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  font-size: 16px;
+  z-index: var(--sr-float-z-wl-launcher);
+  box-shadow: var(--sr-card-hover-shadow);
+  transition: border-color .15s ease, background .15s ease;
+}
+.sr-wl-launcher:hover { background: var(--sr-hover-bg); }
+.sr-wl-launcher:active { filter: brightness(0.97); }
+.sr-wl-launcher-dragging { cursor: grabbing; }
+
+/* Indicator 徽标：wrapper 保持图标垂直居中；徽标默认右上角（Mantine 默认），
+   随按钮整体移动，右上方外露不与下方 copilot 按钮重叠 */
+
+/* Float 挂载期间（open / 离场动画中）隐藏 launcher：不可见、不可点，避免与浮窗重叠遮挡 */
+.sr-wl-launcher-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}

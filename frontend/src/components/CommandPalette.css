@@ -1,0 +1,118 @@
+/* ============================================================
+   CommandPalette 命令面板（cmdk）样式
+   从组件内嵌 <style> 迁出：独立文件，组件 import 引入（vite 打包）。
+   字号走 --sr-font-* 令牌（13px=--sr-font-page / 11px=--sr-font-xs，默认密度下数值不变）。
+   遮罩/投影为 slate-900 系 scrim：走 --sr-overlay / --sr-overlay-soft 令牌
+   （index.css 新增，亮/暗双主题通用）。 */
+[cmdk-overlay] {
+  position: fixed;
+  inset: 0;
+  background: var(--sr-overlay);
+  z-index: 1100;
+  animation: sr-cmdk-fade 0.12s ease;
+}
+.sr-cmdk-content {
+  position: fixed;
+  top: 16dvh; /* dvh:移动端软键盘弹出时视口高实时收缩,面板自动上移不被键盘遮挡(P2-12) */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, calc(100vw - 32px));
+  z-index: 1101;
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+  /* 卡片投影走令牌；大号抬升投影走 --sr-overlay-soft（同遮罩系 scrim） */
+  box-shadow: var(--sr-card-shadow), 0 24px 64px var(--sr-overlay-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: sr-cmdk-pop 0.12s ease;
+}
+@keyframes sr-cmdk-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sr-cmdk-pop {
+  from { opacity: 0; transform: translateX(-50%) scale(0.97); }
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+.sr-cmdk-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  /* 命令输入行刻意高于常规控件：由 --sr-ctl-h 派生（默认密度 32+14=46px，
+     紧凑密度自动收至 42px 与全局控件同步），不另设裸定值 */
+  height: calc(var(--sr-ctl-h) + 14px);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--sr-border);
+}
+.sr-cmdk-input-wrap:focus-within { border-bottom-color: var(--sr-accent); }
+.sr-cmdk-input-wrap > svg { flex-shrink: 0; color: var(--sr-text-3); }
+.sr-cmdk-input-wrap [cmdk-input] {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  font-size: var(--sr-font-page);
+  color: var(--sr-text-1);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.sr-cmdk-input-wrap [cmdk-input]::placeholder { color: var(--sr-text-3); }
+.sr-cmdk-content [cmdk-list] {
+  overflow-y: auto;
+  max-height: min(55vh, 430px);
+  padding: 6px 0 8px;
+  outline: none;
+}
+.sr-cmdk-content [cmdk-group-heading] {
+  padding: 10px 16px 4px;
+  font-size: var(--sr-font-xs);
+  font-weight: 600;
+  color: var(--sr-text-3);
+}
+.sr-cmdk-content [cmdk-item] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1px 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: var(--sr-font-page);
+  color: var(--sr-text-1);
+  cursor: pointer;
+  user-select: none;
+}
+.sr-cmdk-content [cmdk-item][data-selected='true'] {
+  background: color-mix(in srgb, var(--sr-accent) 14%, transparent);
+}
+.sr-cmdk-content [cmdk-item][data-disabled='true'] {
+  color: var(--sr-text-3);
+  cursor: not-allowed;
+}
+.sr-cmdk-ico {
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: var(--sr-font-page);
+  color: var(--sr-text-2);
+}
+.sr-cmdk-lbl { flex-shrink: 0; }
+.sr-cmdk-parent {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+.sr-cmdk-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 14px;
+  height: 30px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}

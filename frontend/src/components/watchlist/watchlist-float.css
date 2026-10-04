@@ -1,0 +1,255 @@
+/* ===== 全局关注提醒浮窗（WatchlistFloat） =====
+   单形态：展开面板（可拖拽）；移动端（<768）为底部 sheet（≤72dvh 面板，参照 copilot.css 移动端模式）。
+   样式与 copilot 浮窗统一令牌（z-index 窗口分层见 styles/float-tokens.css /
+   头部背景 / 圆角 / --sr-float-shadow），
+   尺寸固定策略（clamp + 固定，宽度 min(400px, 100vw-32)，高度上限 min(600px, 100dvh-40)）。
+   颜色一律走 --sr-* 令牌，禁止硬编码主题敏感色。 */
+
+/* 容器：position fixed 固定右下（rect 为 null 时 CSS 默认定位），
+   拖拽后由组件内联 left/top 接管（宽高 CSS 单一事实源，rect 不写入尺寸）；
+   z-index 分层（--sr-float-z-wl-window = copilot 窗口 + 1，重叠时关注浮窗在上）；
+   宽度 clamp 收敛，窄屏按视口收缩 */
+.sr-wl-float {
+  position: fixed;
+  right: var(--sr-float-edge);
+  bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + var(--sr-float-bottom-clearance));
+  z-index: var(--sr-float-z-wl-window);
+  width: min(400px, calc(100vw - 32px));
+  max-height: min(600px, calc(100dvh - 40px));
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  box-shadow: var(--sr-float-shadow);
+  overflow: hidden;
+  color: var(--sr-text-1);
+  /* morphing 几何动画：transform-origin 0 0 使收缩变换收敛于 launcher 锚点；
+     transform/opacity 过渡驱动进入（收缩→正常）与离开（正常→收缩）动画 */
+  transform-origin: 0 0;
+  transition: transform .22s cubic-bezier(.2,.7,.3,1), opacity .22s ease;
+}
+/* 拖拽/缩放过程中禁用文本选中（内部选区与拖动手势冲突） */
+.sr-wl-float.sr-wl-float-dragging,
+.sr-wl-float.sr-wl-float-resizing {
+  user-select: none;
+}
+/* 拖动/缩放中禁用一切过渡（防迟滞，2d） */
+.sr-wl-float.sr-wl-float-no-transition,
+.sr-wl-float.sr-wl-float-no-transition * {
+  transition: none !important;
+}
+/* 离开动画：更短时长 + 期间禁用指针交互（2b） */
+.sr-wl-float.sr-wl-float-leaving {
+  transition: transform .18s cubic-bezier(.2,.7,.3,1), opacity .18s ease;
+  pointer-events: none;
+}
+
+/* ===== 头部（展开态；样式对齐 copilot .sr-cop-head：block-bg 背景 + 8px/10px padding）
+   整行可拖：桌面 cursor:grab（按钮组在 .sr-wl-float-actions 内 stopPropagation 排除） */
+.sr-wl-float-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--sr-pad-md) var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  flex-shrink: 0;
+  min-width: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.sr-wl-float.sr-wl-float-dragging .sr-wl-float-head { cursor: grabbing; }
+/* 拖拽手柄图标：仅视觉提示（不再是唯一热区），hover 轻微反馈 */
+.sr-wl-float-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: var(--sr-radius-ctl);
+  color: var(--sr-text-3);
+  font-size: var(--sr-font-sm);
+  pointer-events: none;
+}
+.sr-wl-float-handle:hover { color: var(--sr-text-2); }
+/* 标题：单行省略，窄容器下不换行 */
+.sr-wl-float-title {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sr-wl-float-spacer { flex: 1; }
+/* 头部按钮组：容器阻止 pointerdown 冒泡，防止拖拽与按钮点击冲突 */
+.sr-wl-float-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+/* 头部按钮：纯图标 = ActionIcon（28×28 自带触控目标与居中，无需内边距干预）；
+   文字按钮（查看关注页/全部已读）仍为 Button，保留紧凑内边距；关闭按钮弱化次级色 */
+.sr-wl-float-head .sr-wl-float-actions .sr-wl-float-act-btn {
+  padding-inline: var(--sr-pad-xs);
+}
+.sr-wl-float-actions .sr-wl-float-close button {
+  color: var(--sr-text-3);
+}
+
+/* ===== 列表：内部滚动（容器 max-height 承担上限；flex:1 撑满剩余高度后滚动） */
+.sr-wl-float-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.sr-wl-float-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--sr-pad-md) var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+  min-width: 0;
+}
+.sr-wl-float-item:last-child { border-bottom: none; }
+.sr-wl-float-item-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+/* 名称(代码)：600 粗 + 12px，flex 占满余宽、单行省略 */
+.sr-wl-float-item-name {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  padding: 0;
+  height: auto;
+  line-height: 1.6;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-wl-float-item-sigs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.sr-wl-float-more {
+  font-size: var(--sr-font-meta);
+  line-height: 16px;
+  padding: 0 var(--sr-pad-xs);
+  border-radius: var(--sr-radius-tag);
+  flex-shrink: 0;
+}
+.sr-wl-float-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-2);
+}
+.sr-wl-float-item-time {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+/* 相对上下文词（resolveSignalMoment hint：今天收盘/昨天/盘中…），弱化次级信息 */
+.sr-wl-float-item-time-hint {
+  margin-left: 4px;
+  font-size: var(--sr-font-meta);
+  color: var(--sr-text-3);
+}
+.sr-wl-float-item-tpl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 模板名链接：tooltip 说明「信号模板：xxx」+ 点击跳转信号模板页；次级色、不喧宾夺主 */
+.sr-wl-float-tpl-link {
+  padding: 0;
+  height: auto;
+  line-height: 1.5;
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-wl-float-tpl-link:hover { color: var(--sr-accent); }
+/* 共振得分徽标：名称右端小 Tag（分数 ≤0 不渲染，见组件） */
+.sr-wl-float-score {
+  margin: 0;
+  font-size: var(--sr-font-meta);
+  line-height: 16px;
+  padding: 0 var(--sr-pad-xs);
+  border-radius: var(--sr-radius-tag);
+  flex-shrink: 0;
+}
+/* 行情段：价格 + 涨跌幅（红涨绿跌、零=灰；数字化容错，价格缺省整段不渲染） */
+.sr-wl-float-quote {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: 0;
+  font-size: var(--sr-font-sm);
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+.sr-wl-float-quote-price {
+  color: var(--sr-text-1);
+  font-weight: 600;
+}
+.sr-wl-float-pct-up { color: var(--sr-up); font-weight: 600; }
+.sr-wl-float-pct-down { color: var(--sr-down); font-weight: 600; }
+.sr-wl-float-pct-zero { color: var(--sr-text-3); }
+
+/* ===== 空态：轻提示（关注股列表已弱化移除，避免与关注页重复） ===== */
+.sr-wl-float-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sr-pad-lg);
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-3);
+}
+
+/* ===== 移动端（<768）：底部 sheet（参照 copilot.css 移动端模式；组件恒展开态、不可拖） =====
+   几何 rect=null，定位由 CSS 接管：位于底部导航 + 安全区上方，≤72dvh 高 */
+@media (max-width: 768px) {
+  .sr-wl-float {
+    left: 8px;
+    right: 8px;
+    bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + var(--sr-float-sheet-gap));
+    width: auto;
+    height: min(72dvh, 560px);
+    max-height: none;
+  }
+  .sr-wl-float-head {
+    cursor: default;
+    touch-action: auto;
+    user-select: auto;
+  }
+}
+/* 矮视口（横屏等）：sheet 全屏 */
+@media (max-width: 768px) and (max-height: 520px) {
+  .sr-wl-float {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100dvh;
+  }
+}

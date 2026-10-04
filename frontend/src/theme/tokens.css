@@ -1,0 +1,145 @@
+/* ============================================================
+   tokens.css — 由 scripts/frontend/gen-tokens.mjs 自动生成,禁止手改
+   唯一事实源:src/theme/tokens.ts;改值后重新运行生成脚本
+   结构:亮色 :root + body[data-theme="dark"] + body[data-density="compact"]
+   ============================================================ */
+
+:root {
+  /* 语义色(亮色) */
+  --sr-bg: #f5f6f8;
+  --sr-card-bg: #ffffff;
+  --sr-block-bg: #eef0f3;
+  --sr-sider-bg: #eceef2;
+  --sr-text-1: #14181f;
+  --sr-text-2: #57606a;
+  --sr-text-3: #5f6a76;
+  --sr-border: rgba(16, 24, 40, 0.10);
+  --sr-accent: #1668dc;
+  --sr-accent-deep: #0e4daf;
+  --sr-on-accent: #ffffff;
+  --sr-warning: #b45309;
+  --sr-success: #15803d;
+  --sr-error: #dc2626;
+  --sr-up: #d62025;
+  --sr-down: #067a4f;
+  --sr-star: #b08500;
+  --sr-hover-bg: #e6e9ee;
+  --sr-chart-grid: rgba(120, 140, 160, 0.18);
+  --sr-overlay: rgba(15, 23, 42, 0.45);
+  --sr-overlay-soft: rgba(15, 23, 42, 0.28);
+  --sr-surface-0: #f5f6f8;
+  --sr-surface-1: #ffffff;
+  --sr-surface-2: #eef0f3;
+  --sr-surface-3: #e6e9ee;
+
+  /* 投影(亮色) */
+  --sr-card-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 0 0 1px rgba(16, 24, 40, 0.04);
+  --sr-card-hover-shadow: 0 2px 6px rgba(16, 24, 40, 0.08), 0 0 0 1px rgba(16, 24, 40, 0.05);
+  --sr-float-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+
+  /* 圆角 token(--sr-radius-card 为主键,--sr-card-radius 为兼容别名) */
+  --sr-radius-card: 8px;
+  --sr-radius-ctl: 6px;
+  --sr-radius-tag: 4px;
+  --sr-card-radius: var(--sr-radius-card);
+
+  /* 动效时长令牌:全站 transition 收敛两档 */
+  --sr-dur-fast: 120ms;
+  --sr-dur-norm: 200ms;
+
+  /* 控件与字号(固定档位,不随容器缩放) */
+  --sr-ctl-h: 32px;
+  --sr-font-page: 13px; --sr-font-head: 14px; --sr-font-title: 13px;
+  --sr-font-sm: 12px; --sr-font-xs: 11px; --sr-font-meta: 10px;
+  --sr-font-stat: 22px; --sr-font-display: 28px;
+
+  /* 间距 token(语义) */
+  --sr-gap-page: 16px;   /* 页面级间距 */
+  --sr-gap-card: 12px;   /* 卡片内/卡片间间距 */
+  --sr-gap-row: 8px;     /* 行级间距 */
+  --sr-gap-ctl: 8px;     /* 控件间间距 */
+
+  /* 间距刻度(设计令牌,单一事实源):所有 UI 内边距/间距一律引用 --sr-pad-* */
+  --sr-pad-xs: 4px;
+  --sr-pad-sm: 6px;
+  --sr-pad-md: 8px;
+  --sr-pad-lg: 10px;
+  --sr-pad-xl: 12px;
+  --sr-pad-2xl: 16px;
+  --sr-pad-3xl: 24px;
+
+  /* 卡片体内边距别名:指向间距刻度 */
+  --sr-card-pad: var(--sr-pad-xl) var(--sr-pad-2xl);
+
+  /* 图表标准高度 */
+  --sr-chart-h-sm: 240px; --sr-chart-h-md: 300px; --sr-chart-h-lg: 360px;
+
+  /* 布局:顶栏高 / 内容区 padding / 满高页可用高度 */
+  --sr-header-h: 48px;
+  --sr-content-pad: 16px;
+  --sr-sider-w: 200px;          /* 侧栏展开宽 */
+  --sr-nav-drawer-w: 220px; /* 导航抽屉宽 */
+  --sr-msgrid-w: 340px;        /* 多选下拉网格宽 */
+  --sr-bottombar-h: 0px;
+  --sr-page-fill-h: calc(100dvh - var(--sr-header-h) - var(--sr-content-pad) * 2 - var(--sr-bottombar-h) - var(--sr-safe-top) - var(--sr-safe-bottom));
+
+  /* 安全区 */
+  --sr-safe-top: env(safe-area-inset-top, 0px);
+  --sr-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sr-safe-left: env(safe-area-inset-left, 0px);
+  --sr-safe-right: env(safe-area-inset-right, 0px);
+
+  /* 斑马纹底色(长表格偶数行):跟随 --sr-block-bg,var() 在声明处解析,故暗色需重声明 */
+  --sr-zebra-bg: color-mix(in srgb, var(--sr-block-bg) 55%, transparent);
+}
+
+body[data-theme='dark'] {
+  /* 语义色(暗色) */
+  --sr-bg: #0d1117;
+  --sr-card-bg: #161b22;
+  --sr-block-bg: #1c2128;
+  --sr-sider-bg: #10151c;
+  --sr-text-1: #e6edf3;
+  --sr-text-2: #9aa7b5;
+  --sr-text-3: #8b98a9;
+  --sr-border: rgba(148, 163, 184, 0.14);
+  --sr-accent: #4c9aff;
+  --sr-accent-deep: #0d2a52;
+  --sr-on-accent: #0c0f13;
+  --sr-warning: #f0a93a;
+  --sr-success: #4ade80;
+  --sr-error: #f87171;
+  --sr-up: #ff6b6b;
+  --sr-down: #2fdd8f;
+  --sr-star: #e3b341;
+  --sr-hover-bg: #252b33;
+  --sr-chart-grid: rgba(148, 163, 184, 0.18);
+  --sr-overlay: rgba(15, 23, 42, 0.45);
+  --sr-overlay-soft: rgba(15, 23, 42, 0.28);
+  --sr-surface-0: #0d1117;
+  --sr-surface-1: #161b22;
+  --sr-surface-2: #1c2128;
+  --sr-surface-3: #252b33;
+
+  /* 投影(暗色:仅 hover 阴影与亮色不同) */
+  --sr-card-hover-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(148, 163, 184, 0.12);
+
+  /* 暗色斑马纹重声明(var() 在声明处解析,随主题域重声明才取到暗色 --sr-block-bg) */
+  --sr-zebra-bg: color-mix(in srgb, var(--sr-block-bg) 55%, transparent);
+}
+
+body[data-density='compact'] {
+  /* 间距刻度整表缩放(2/4/6/8/10/12/16) */
+  --sr-pad-xs: 2px; --sr-pad-sm: 4px; --sr-pad-md: 6px;
+  --sr-pad-lg: 8px; --sr-pad-xl: 10px; --sr-pad-2xl: 12px; --sr-pad-3xl: 16px;
+  /* 圆角降档(6/4/4) */
+  --sr-radius-card: 6px; --sr-radius-ctl: 4px; --sr-radius-tag: 4px;
+  /* 语义 gap 收紧 */
+  --sr-gap-page: 12px; --sr-gap-card: 8px; --sr-gap-row: 6px; --sr-gap-ctl: 6px;
+  --sr-ctl-h: 28px;
+  --sr-font-page: 12px; --sr-font-head: 13px; --sr-font-title: 12px;
+  --sr-font-sm: 11px; --sr-font-xs: 10px; --sr-font-meta: 9px;
+  --sr-font-stat: 21px; --sr-font-display: 27px;
+  --sr-card-pad: var(--sr-pad-md) var(--sr-pad-lg);
+  --sr-chart-h-sm: 200px; --sr-chart-h-md: 260px; --sr-chart-h-lg: 320px;
+}

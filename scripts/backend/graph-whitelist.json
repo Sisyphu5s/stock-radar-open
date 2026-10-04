@@ -1,0 +1,55 @@
+{
+  "_note": "后端图审计白名单:存量违例豁免,只删不增。分组对应 graph_audit.py 规则 B1~B4。",
+  "_debt": {
+    "b1_edges": "api 层直穿 storage 13 处(db/klines/appparams/hs300 会话与缓存直接取用)——分层债,登记 TODO P2-30 后续波次",
+    "b3_hot": "/experiments 轮询路径调用链直达 SessionLocal 4 条——热路径 DB 抖动,登记 TODO",
+    "b4_marks": "模块级共享可变状态 23 处(registry/缓存表/全局配置等,部分为注册表机制有意设计;T-122 新增 runner._db_status_cache 带锁状态缓存);行号白名单脆弱,改动相关文件后需维护行号;storage/providers/base.py:39 shared_session 已随 T-95 收编(thread-local 会话)删除"
+  },
+  "b1_edges": [
+    "api/alpha.py->storage/db.py",
+    "api/datasets.py->storage/db.py",
+    "api/indicators.py->storage/appparams.py",
+    "api/indicators.py->storage/klines.py",
+    "api/market.py->storage/db.py",
+    "api/paper.py->storage/db.py",
+    "api/paper.py->storage/klines.py",
+    "api/screener.py->storage/db.py",
+    "api/screener.py->storage/hs300.py",
+    "api/signals.py->storage/db.py",
+    "api/stocks.py->storage/klines.py",
+    "api/system.py->storage/db.py",
+    "api/todos.py->storage/db.py"
+  ],
+  "b2_dead": [],
+  "b3_hot": [
+    "/experiments/",
+    "/experiments/{job_id}",
+    "/experiments/{job_id}/events",
+    "/experiments/page"
+  ],
+  "b4_marks": [
+    "api/paper.py:61",
+    "api/paper.py:65",
+    "core/events.py:50",
+    "core/events.py:52",
+    "core/plugins.py:41",
+    "core/plugins.py:55",
+    "core/sources.py:79",
+    "core/sources.py:308",
+    "core/sources.py:309",
+    "core/sources.py:680",
+    "core/tasks/registry.py:16",
+    "core/tasks/runner.py:123",
+    "core/tasks/runner.py:129",
+    "core/tasks/runner.py:133",
+    "core/tasks/runner.py:164",
+    "core/warmup.py:21",
+    "lib/alpha/latex.py:126",
+    "lib/alpha/nn.py:61",
+    "lib/alpha/operators.py:14",
+    "lib/signals/engine.py:34",
+    "storage/db.py:205",
+    "storage/klines.py:117",
+    "storage/klines.py:348"
+  ]
+}

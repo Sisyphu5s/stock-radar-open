@@ -1,0 +1,91 @@
+/* ============================================================
+   指标分组菜单（IndicatorStrip 组件专属，自 stock.css 迁入）
+   ============================================================ */
+
+.sr-ind-menu-trigger-active {
+  border-color: var(--sr-accent) !important;
+  /* 文字色走 onAccent(实底上的前景),禁 accent 同色字——蓝底蓝字对比度 1:1 完全不可见(T-80) */
+  color: var(--sr-on-accent) !important;
+}
+
+.sr-ind-menu {
+  width: min(300px, calc(100vw - 32px));
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 2px;
+}
+.sr-ind-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sr-text-1);
+  padding: 4px 6px 8px;
+}
+.sr-ind-menu-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sr-accent);
+}
+.sr-ind-menu-group {
+  font-size: 11px;
+  color: var(--sr-text-3);
+  padding: 6px 6px 4px;
+}
+.sr-ind-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 4px;
+  padding: 0 2px 4px;
+}
+.sr-ind-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 4px 6px;
+  border-radius: var(--sr-radius-ctl);
+  border: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  color: var(--sr-text-2);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.sr-ind-menu-item:hover {
+  border-color: var(--sr-accent);
+  color: var(--sr-text-1);
+}
+.sr-ind-menu-on {
+  border-color: var(--sr-accent);
+  color: var(--sr-text-1);
+  background: color-mix(in srgb, var(--sr-accent) 12%, transparent);
+}
+.sr-ind-menu-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--sr-border);
+  background: var(--sr-card-bg);
+  color: var(--sr-accent);
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.sr-ind-menu-on .sr-ind-menu-box {
+  border-color: var(--sr-accent);
+}
+.sr-ind-menu-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-ind-menu-tuned {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--sr-accent);
+  flex-shrink: 0;
+}

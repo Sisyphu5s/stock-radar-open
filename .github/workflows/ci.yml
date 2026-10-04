@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Public release guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/security/release_check.py
+
+  python_security:
+    name: Python dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uvx pip-audit==2.10.1 -r backend/requirements.lock
+
+  frontend:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm audit --audit-level=low
+      - run: npx tsc -b
+      - run: npm run lint
+      - run: npm run build
+      - run: node ../scripts/frontend/graph-audit/graph-audit.mjs
+      - run: node ../scripts/frontend/time-moment-check.mjs
+      - run: node ../scripts/frontend/design-system-audit.mjs
+
+  backend:
+    name: Backend checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      SR_MLX_OFF: "1"
+      SR_GP_BACKEND: numpy
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v5
+      - run: uv venv --python 3.12 .venv
+      - run: uv pip sync --python .venv/bin/python requirements.lock
+      - run: .venv/bin/python -m pytest -q
+      - run: .venv/bin/python -c "import app.main"
+      - run: PYTHONPATH=. .venv/bin/python ../scripts/backend/graph_audit.py
+      - run: PYTHONPATH=. .venv/bin/python ../scripts/backend/schema_dump.py --out ../scripts/backend/contract.json
+      - run: git diff --exit-code ../scripts/backend/contract.json
+
+  native:
+    name: Optional native build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/native/build.sh
+      - run: python3 scripts/native/smoke.py

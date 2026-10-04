@@ -1,0 +1,15 @@
+fastapi==0.141.1
+uvicorn[standard]==0.52.1
+sqlalchemy==2.0.51
+pydantic==2.13.4
+pydantic-settings==2.15.0
+apscheduler==3.11.3
+akshare==1.18.83
+numpy==2.5.1
+pandas==3.0.5
+httpx==0.28.1
+requests==2.34.2
+gplearn==0.4.3
+# 可选算法（未启用）: pysr（Julia 运行时，神经网络混合搜索）; bsr（Amazon BSR，torch 依赖，PyPI 包名被占用需 GitHub 安装）
+
+# Optional Apple Silicon acceleration: install backend/requirements-mlx.txt.

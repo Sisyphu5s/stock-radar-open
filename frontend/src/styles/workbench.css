@@ -1,0 +1,214 @@
+/* ============================================================
+   工作台面板骨架（T5 模板结构，全局化自 market/stock/stock.css）：
+   个股工作台 Splitter 布局 / 面板容器 / 通用统计网格。
+   面板内部专属样式（工具条/指标菜单/时间线/调优）随组件迁入各组件同目录 css。
+   使用 --sr-* token，无渐变无卡套卡。
+   ============================================================ */
+
+/* ===== 工作台新布局（Mantine Splitter）：横排/堆叠由容器实测宽动态驱动（M3，
+   判定在 StockWorkbench.tsx：宽 ≥720 横向 Splitter 分栏等高自适应；<720 上下堆叠：
+   各区域固定高度，整页纵向滚动）。JS 动态类 sr-wb-layout-split / sr-wb-layout-stack 承载
+   两态样式，禁媒体查询硬编码断点 ===== */
+/* T-55 多股 tab 保活链：panes 占满剩余高度，holder 承接单个实例（非活跃 display:none 不卸载），
+   pane-body 为实例根（flex 纵向: StockHeader + sr-wb-layout） */
+.sr-wb-panes {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sr-wb-pane-holder {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sr-wb-pane-body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* T-117 K 线应用内全屏（壳层 chrome 已由 .sr-kline-fs 隐藏）：
+   KlinePanel 保持同一树位置（不换树不重挂，图表单实例状态零丢失），
+   本层 CSS 隐藏 StockHeader/时间线/Inspector 并让 K 线 pane flex 占满。
+   Mantine Splitter pane 为 flex-grow:0 + % basis（sizes 内联），隐藏兄弟 pane 后
+   剩余 pane 不会自动扩展——必须 !important 强制 flex: 1 1 0%。 */
+.sr-wb-pane-body.sr-wb-fs .sr-stk-header,
+.sr-wb-pane-body.sr-wb-fs .sr-wb-tl-pane,
+.sr-wb-pane-body.sr-wb-fs .sr-wb-insp-pane,
+.sr-wb-pane-body.sr-wb-fs .sr-wb-col-side {
+  display: none !important;
+}
+.sr-wb-pane-body.sr-wb-fs .sr-wb-main-pane,
+.sr-wb-pane-body.sr-wb-fs .sr-wb-kline-pane {
+  flex: 1 1 0% !important;
+}
+/* 隐藏 Splitter 拖拽手柄（兄弟 pane 隐藏后残留 2px 竖/横线；结构性选择器，不依赖 Mantine 哈希类） */
+.sr-wb-pane-body.sr-wb-fs .sr-wb-hsplit > div:not(.sr-wb-pane),
+.sr-wb-pane-body.sr-wb-fs .sr-wb-main .sr-wb-splitter > div:not(.sr-wb-pane) {
+  display: none !important;
+}
+/* K 线主区：占满（桌面分栏态原有 height:100%，堆叠态 clamp 高度在此覆盖为撑满） */
+.sr-wb-pane-body.sr-wb-fs .sr-wb-main {
+  height: 100%;
+  min-height: 0;
+}
+.sr-wb-pane-body.sr-wb-fs .sr-wb-col-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sr-wb-layout {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.sr-wb-side,
+.sr-wb-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.sr-wb-side {
+  height: clamp(240px, 45vh, 380px);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+  background: var(--sr-card-bg);
+  overflow: hidden;
+}
+.sr-wb-main {
+  height: clamp(480px, 70vh, 640px);
+}
+/* 堆叠态（<720 容器实测宽，JS 动态类 sr-wb-layout-stack，判定在 StockWorkbench.tsx）：
+   上下堆叠顺序：K 线主区在前（首屏优先），信号时间线在后；整页纵向滚动由
+   .sr-wb-layout 的 overflow-y:auto 承担 */
+.sr-wb-layout-stack {
+  gap: 12px;
+}
+.sr-wb-layout-stack .sr-wb-col-main { order: 1; }
+.sr-wb-layout-stack .sr-wb-col-side { order: 2; }
+.sr-wb-splitter {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+/* 分栏态（≥720 容器实测宽，JS 动态类 sr-wb-layout-split）：横向 Splitter 等高自适应；
+   外层不滚动（Splitter 面板内部各自承担滚动）。
+   面板高度由 Splitter 决定，height:100% 直接填满，防止内层 Splitter 与可视面板脱钩。 */
+.sr-wb-layout-split {
+  overflow: hidden;
+}
+.sr-wb-layout-split .sr-wb-side,
+.sr-wb-layout-split .sr-wb-main {
+  height: 100%;
+  min-height: 0;
+}
+.sr-wb-layout-split .sr-wb-main {
+  overflow: hidden; /* 内容最小化溢出防护 */
+}
+/* 横向 Splitter（信号时间线 / K 线主区）Pane 防溢出：内部滚动由面板内容各自承担 */
+.sr-wb-pane {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ===== 基本面/财务/风险统计卡网格：auto-fill 网格统一排版（sections 共用） =====
+   网格行距走 --sr-gap-card（常规 12px / compact 8px），缓解文本密集 */
+.sr-wb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sr-gap-card);
+  min-width: 0;
+}
+
+/* ===== 风险指标板块（sections/risk.tsx）：分组衬线框，无底色无阴影（扁平，与 CardShell 区分） ===== */
+.sr-wb-group {
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+  padding: var(--sr-pad-sm) var(--sr-pad-lg);
+}
+.sr-wb-group + .sr-wb-group {
+  margin-top: var(--sr-gap-card);
+}
+
+/* ===== 风险指标成对行式（sections/risk.tsx）：宽度够则两列、同看指标同排 =====
+   容器为 auto-fill 网格：宽度 ≥2×minmax 时两列平铺，窄面板自动回落单列；
+   数组顺序即排布语义——相邻两项 = 一起看的指标对（同排左右贴邻）；
+   cell 内 label + value 紧贴（gap --sr-pad-md）、行内容左对齐，右侧留白；
+   sub 浅色小字缀于数值之后；sr-wb-row-full 单项横跨整行（组内补单） */
+.sr-wb-rows {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  column-gap: var(--sr-pad-2xl);
+  min-width: 0;
+}
+.sr-wb-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sr-pad-md);
+  min-height: 30px;
+  padding: var(--sr-pad-sm) 0;
+}
+.sr-wb-row-full {
+  grid-column: 1 / -1;
+}
+.sr-wb-row-label {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-2);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.sr-wb-row-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sr-pad-sm);
+  font-size: var(--sr-font-head);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.sr-wb-row-sub {
+  font-size: var(--sr-font-xs);
+  font-weight: 400;
+  color: var(--sr-text-3);
+}
+
+/* ===== 风险样本/特征汇总行（sections/risk.tsx）：label 淡 + 值强调，非整行小字 ===== */
+.sr-wb-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sr-pad-xs) var(--sr-pad-xl);
+  margin-top: var(--sr-gap-card);
+  font-size: var(--sr-font-sm);
+  line-height: 1.6;
+}
+.sr-wb-kv {
+  white-space: nowrap;
+}
+.sr-wb-kv-k {
+  color: var(--sr-text-3);
+  margin-right: var(--sr-pad-xs);
+}
+.sr-wb-kv-v {
+  font-weight: 600;
+  color: var(--sr-text-1);
+}
+
+/* 统计块（sections 卡片内数据块） */
+.sr-wb-stat {
+  min-width: 0;
+  padding: var(--sr-pad-lg) var(--sr-pad-xl);
+  border-radius: var(--sr-card-radius);
+  background: var(--sr-block-bg);
+  border: 1px solid var(--sr-border);
+}

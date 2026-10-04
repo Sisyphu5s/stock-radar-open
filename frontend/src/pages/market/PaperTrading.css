@@ -1,0 +1,159 @@
+/* ============================================================
+   模拟盘工作台(PaperTrading.tsx)局部样式:多项目工作台
+   左项目列表 + 右内容区。T-44 从 pages/market/paper.css 拆分。
+   全部颜色走 --sr-* 变量。
+   ============================================================ */
+
+.sr-paper-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  align-items: stretch;
+}
+
+/* 项目面板:相对宽 clamp(窄屏自动收缩),fill 高度内独立滚动(内容超高时不挤压右侧)
+   T-63:flex-basis 从 20vw(视口宽)改 18%(容器宽)——布局宽度只随容器相对伸缩,不再依赖视口 */
+.sr-paper-proj-panel {
+  flex: 0 0 clamp(180px, 18%, 260px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--sr-card-pad);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+}
+.sr-paper-proj-head {
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+}
+.sr-paper-proj-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-pad-xs);
+  min-width: 0;
+}
+.sr-paper-proj-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-pad-xs);
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-block-bg);
+  cursor: pointer;
+  transition: border-color var(--sr-dur-fast) ease, background-color var(--sr-dur-fast) ease;
+}
+.sr-paper-proj-item:hover {
+  border-color: var(--sr-accent);
+}
+.sr-paper-proj-item-active {
+  border-color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 10%, var(--sr-block-bg));
+}
+.sr-paper-proj-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+}
+.sr-paper-proj-name {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.sr-paper-proj-item-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+}
+/* 项目状态:监控/运行中带活动点(Indicator) */
+.sr-paper-proj-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+  white-space: nowrap;
+}
+.sr-paper-proj-stocks {
+  white-space: nowrap;
+}
+.sr-paper-proj-time {
+  white-space: nowrap;
+}
+.sr-paper-proj-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* 右侧内容区:占满剩余宽度,纵向弹性(摘要条 + 结果区) */
+.sr-paper-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-card);
+}
+.sr-paper-main-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sr-gap-row);
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* 窄屏项目选择下拉 */
+.sr-paper-proj-select {
+  width: 100%;
+}
+
+/* 详情加载失败提示条(带重试入口) */
+.sr-paper-detail-error {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  border: 1px solid var(--sr-warning);
+  border-radius: var(--sr-radius-ctl);
+  color: var(--sr-warning);
+  font-size: var(--sr-font-xs);
+}
+
+/* 窄屏(<768):项目面板折叠为顶部下拉,整体纵向堆叠 */
+@media (max-width: 768px) {
+  .sr-paper-layout {
+    flex-direction: column;
+  }
+  .sr-paper-proj-panel {
+    flex: 0 0 auto;
+    width: 100%;
+    max-height: none;
+  }
+  .sr-paper-main {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

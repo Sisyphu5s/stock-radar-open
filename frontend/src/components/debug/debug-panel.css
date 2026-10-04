@@ -1,0 +1,243 @@
+/* ============================================================
+   DebugPanel 可拖拽工作台样式
+   - 右下角固定,z-index 2000(高于覆盖层 1900),可拖拽
+   - 配色参考 interaction.css .sr-debug-panel(76-101),全部令牌化
+     (原硬编码 #ff3b30 / rgba(255,59,48,.45) → var(--sr-error) 系)
+   ============================================================ */
+.sr-dbg-panel {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + 96px);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  width: 264px;
+  max-height: min(60vh, 480px);
+  border: 1px solid color-mix(in srgb, var(--sr-error) 45%, transparent);
+  border-radius: var(--sr-card-radius);
+  background: color-mix(in srgb, var(--sr-card-bg) 94%, transparent);
+  box-shadow: var(--sr-card-shadow);
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  overflow: hidden;
+  user-select: none;
+}
+/* 头部:标题 + 拖拽手柄 + 折叠/关闭 */
+.sr-dbg-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-row);
+  padding: var(--sr-pad-md) var(--sr-pad-lg);
+  cursor: grab;
+  border-bottom: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  flex-shrink: 0;
+}
+.sr-dbg-header:active { cursor: grabbing; }
+.sr-dbg-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-error);
+}
+.sr-dbg-grip { color: var(--sr-text-3); }
+.sr-dbg-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.sr-dbg-actions button {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-tag);
+  background: var(--sr-card-bg);
+  color: var(--sr-text-2);
+  font-size: var(--sr-font-sm);
+  cursor: pointer;
+}
+.sr-dbg-actions button:hover {
+  color: var(--sr-text-1);
+  border-color: var(--sr-accent);
+}
+/* 三 Tab 分段 */
+.sr-dbg-tabs {
+  display: flex;
+  gap: var(--sr-pad-xs);
+  padding: var(--sr-pad-sm) var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+  flex-shrink: 0;
+}
+.sr-dbg-tab-btn {
+  flex: 1;
+  padding: 4px 6px;
+  font-size: var(--sr-font-xs);
+  border: 1px solid transparent;
+  border-radius: var(--sr-radius-ctl);
+  background: transparent;
+  color: var(--sr-text-2);
+  cursor: pointer;
+}
+.sr-dbg-tab-btn:hover { color: var(--sr-text-1); background: var(--sr-hover-bg); }
+.sr-dbg-tab-btn.is-active {
+  color: var(--sr-text-1);
+  background: color-mix(in srgb, var(--sr-accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--sr-accent) 40%, transparent);
+}
+/* Tab 内容 */
+.sr-dbg-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  padding: var(--sr-pad-md) var(--sr-pad-lg);
+  overflow-y: auto;
+  min-height: 0;
+}
+.sr-dbg-empty {
+  padding: var(--sr-pad-md) 0;
+  text-align: center;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+.sr-dbg-el {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--sr-font-xs);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  word-break: break-all;
+}
+.sr-dbg-kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+}
+.sr-dbg-kv span:last-child {
+  color: var(--sr-text-1);
+  text-align: right;
+  word-break: break-all;
+  font-variant-numeric: tabular-nums;
+}
+.sr-dbg-sec {
+  margin-top: 2px;
+  font-size: var(--sr-font-xs);
+  font-weight: 600;
+  color: var(--sr-text-3);
+}
+.sr-dbg-hint {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-accent);
+}
+/* Box Model 数值表 */
+.sr-dbg-bm {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--sr-font-xs);
+  font-variant-numeric: tabular-nums;
+}
+.sr-dbg-bm th,
+.sr-dbg-bm td {
+  padding: 2px 4px;
+  border: 1px solid var(--sr-border);
+  text-align: right;
+}
+.sr-dbg-bm th {
+  font-weight: 600;
+  color: var(--sr-text-3);
+  text-align: center;
+}
+.sr-dbg-bm td:first-child {
+  text-align: left;
+  color: var(--sr-text-2);
+}
+/* 定位链 */
+.sr-dbg-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.sr-dbg-chain span {
+  padding: 1px 5px;
+  border-radius: var(--sr-radius-tag);
+  background: var(--sr-block-bg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+}
+.sr-dbg-dim { color: var(--sr-text-3); }
+/* 测量/碰撞列表 */
+.sr-dbg-tabtool {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+.sr-dbg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sr-dbg-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: var(--sr-radius-tag);
+  background: var(--sr-block-bg);
+  cursor: pointer;
+}
+.sr-dbg-row:hover { background: var(--sr-hover-bg); }
+.sr-dbg-row-main {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-1);
+  word-break: break-all;
+  font-variant-numeric: tabular-nums;
+}
+.sr-dbg-row-detail {
+  display: block;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  word-break: break-all;
+}
+.sr-dbg-row-kind {
+  flex-shrink: 0;
+  padding: 1px 4px;
+  border-radius: var(--sr-radius-tag);
+  background: color-mix(in srgb, var(--sr-accent) 14%, transparent);
+  font-size: 10px;
+  color: var(--sr-accent);
+}
+.sr-dbg-del {
+  flex-shrink: 0;
+  padding: 1px 6px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-tag);
+  background: var(--sr-card-bg);
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  cursor: pointer;
+}
+.sr-dbg-del:hover { color: var(--sr-error); border-color: var(--sr-error); }
+/* 底部:贴边计数 + 关闭提示 */
+.sr-dbg-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: var(--sr-pad-sm) var(--sr-pad-lg);
+  border-top: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+}
+.sr-dbg-footer span:first-child {
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+}

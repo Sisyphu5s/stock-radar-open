@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A股量化雷达工作台：市场监控与信号中心 + 因子挖掘与 Alpha 实验室" />
+    <title>Stock Radar 量化终端</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        // T-47 暗色默认:与 useAppStore.initTheme 同构(localStorage → dark),防暗色首屏白闪
+        var t = 'dark'
+        try {
+          var saved = localStorage.getItem('sr-theme')
+          if (saved === 'light' || saved === 'dark') t = saved
+        } catch (e) { }
+        document.body.setAttribute('data-theme', t)
+      })();
+      (function () {
+        var d = 'comfort'
+        try {
+          var saved = localStorage.getItem('sr-density')
+          if (saved === 'compact' || saved === 'comfort') d = saved
+        } catch (e) { }
+        document.body.setAttribute('data-density', d)
+      })()
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

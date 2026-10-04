@@ -1,0 +1,323 @@
+{
+  "pages": [],
+  "css": [
+    "market/PaperTrading.css",
+    "market/compare/compare.css",
+    "market/paper/ParamSummary.css",
+    "market/paper/ProjectWizard.css",
+    "market/paper/WatchResults.css",
+    "market/paper/paper-shared.css",
+    "market/signalCenter/signalStreamPanel.css",
+    "market/signalCenter/watchlistPane.css",
+    "market/signalCenter/indexStrip.css",
+    "market/signals/mobileSignalList.css",
+    "market/stock/StockHeader.css",
+    "market/watchlist/watchlist.css",
+    "market/workbench/IndicatorStrip.css",
+    "market/workbench/InspectorPanel.css",
+    "market/workbench/KlineToolbar.css",
+    "market/workbench/TimelinePanel.css",
+    "market/workbench/sections/tune/tune.css",
+    "research/datasets/datasets.css",
+    "research/discovery/discovery.css",
+    "research/factors/factors.css",
+    "research/shared/research-shared.css",
+    "research/tasks/tasks.css",
+    "research/validation/run-layout.css",
+    "research/workbench.css",
+    "market/workbench/stock/WorkbenchTabs.css"
+  ],
+  "g1_tables": [
+    "pages/research/discovery/ResultDetailDrawer.tsx:203",
+    "pages/research/evaluation/TuneModal.tsx:436",
+    "pages/research/factors/FactorDetailDrawer.tsx:450",
+    "pages/research/tasks/summary.tsx:124",
+    "pages/research/tasks/summary.tsx:245",
+    "pages/research/tasks/summary.tsx:279"
+  ],
+  "g2_spans": [
+    "pages/research/evaluation/TuneModal.tsx:333",
+    "pages/research/evaluation/TuneModal.tsx:353",
+    "pages/research/evaluation/TuneModal.tsx:364",
+    "pages/research/evaluation/TuneModal.tsx:374",
+    "pages/research/evaluation/TuneModal.tsx:384",
+    "pages/research/evaluation/TuneModal.tsx:392"
+  ],
+  "g3_sizes": [],
+  "g4_window": [
+    "hooks/useFloatWindow.ts:304",
+    "hooks/useFloatWindow.ts:334",
+    "hooks/useFloatWindow.ts:382",
+    "hooks/useFloatGeometry.ts:168",
+    "hooks/useFloatGeometry.ts:184",
+    "hooks/useFloatGeometry.ts:211",
+    "hooks/useFloatGeometry.ts:268",
+    "hooks/useFloatGeometry.ts:293",
+    "hooks/useFloatGeometry.ts:350",
+    "components/debug/DebugOverlay.tsx:175",
+    "components/debug/DebugOverlay.tsx:179",
+    "components/debug/DebugPanel.tsx:73",
+    "components/debug/DebugPanel.tsx:87",
+    "components/debug/DebugPanel.tsx:112",
+    "components/watchlist/WatchlistFloat.tsx:41",
+    "components/watchlist/WatchlistWidget.tsx:55",
+    "components/watchlist/WatchlistWidget.tsx:57",
+    "components/MultiSelectGrid.tsx:55",
+    "components/MultiSelectGrid.tsx:57",
+    "utils/debug/debugCore.ts:239"
+  ],
+  "g5_collapse": [
+    "components/JobBar.tsx:122",
+    "pages/research/tasks/detailDrawer.tsx:150",
+    "pages/research/tasks/detailDrawer.tsx:154",
+    "pages/research/tasks/detailDrawer.tsx:155",
+    "pages/research/tasks/detailDrawer.tsx:156"
+  ],
+  "g6_offsets": [],
+  "_debt": {
+    "market/PaperTrading.css": {
+      "_src": "src/pages/market/PaperTrading.tsx",
+      "_plan": "批次A(paper 域 5 条):paper 域私有样式归并至 paper-shared 后删本条目"
+    },
+    "market/compare/compare.css": {
+      "_src": "src/pages/market/compare/ComparePage.tsx",
+      "_plan": "批次D(其余 market 单页 5 条):样式令牌化后删本条目"
+    },
+    "market/paper/ParamSummary.css": {
+      "_src": "src/pages/market/paper/ParamSummary.tsx",
+      "_plan": "批次A(paper 域 5 条):paper 域私有样式归并至 paper-shared 后删本条目"
+    },
+    "market/paper/ProjectWizard.css": {
+      "_src": "src/pages/market/paper/ProjectWizard.tsx",
+      "_plan": "批次A(paper 域 5 条):paper 域私有样式归并至 paper-shared 后删本条目"
+    },
+    "market/paper/WatchResults.css": {
+      "_src": "src/pages/market/paper/WatchResults.tsx",
+      "_plan": "批次A(paper 域 5 条):paper 域私有样式归并至 paper-shared 后删本条目"
+    },
+    "market/paper/paper-shared.css": {
+      "_src": "src/pages/market/PaperTrading.tsx + src/pages/market/paper/{PortfolioView,ExperimentResults,WatchResults}.tsx",
+      "_plan": "批次A(paper 域 5 条):paper 域共享样式令牌化后删本条目(收口后其余 A 批 4 条一并删)"
+    },
+    "market/signalCenter/signalStreamPanel.css": {
+      "_src": "src/pages/market/SignalCenter.tsx + src/pages/market/signalCenter/SignalStreamPanel.tsx",
+      "_plan": "批次D(其余 market 单页 5 条):样式令牌化后删本条目"
+    },
+    "market/signals/mobileSignalList.css": {
+      "_src": "src/pages/market/signals/MobileSignalList.tsx",
+      "_plan": "批次D(其余 market 单页 5 条):样式令牌化后删本条目"
+    },
+    "market/stock/StockHeader.css": {
+      "_src": "src/pages/market/stock/StockHeader.tsx",
+      "_plan": "批次D(其余 market 单页 5 条):样式令牌化后删本条目"
+    },
+    "market/watchlist/watchlist.css": {
+      "_src": "src/pages/market/WatchlistPage.tsx",
+      "_plan": "批次D(其余 market 单页 5 条):样式令牌化后删本条目"
+    },
+    "market/workbench/IndicatorStrip.css": {
+      "_src": "src/pages/market/workbench/IndicatorStrip.tsx",
+      "_plan": "批次B(工作台域 5 条):工作台面板样式令牌化后删本条目"
+    },
+    "market/workbench/InspectorPanel.css": {
+      "_src": "src/pages/market/workbench/InspectorPanel.tsx",
+      "_plan": "批次B(工作台域 5 条):工作台面板样式令牌化后删本条目"
+    },
+    "market/workbench/KlineToolbar.css": {
+      "_src": "src/pages/market/workbench/KlineToolbar.tsx",
+      "_plan": "批次B(工作台域 5 条):工作台面板样式令牌化后删本条目"
+    },
+    "market/workbench/TimelinePanel.css": {
+      "_src": "src/pages/market/workbench/TimelinePanel.tsx",
+      "_plan": "批次B(工作台域 5 条):工作台面板样式令牌化后删本条目"
+    },
+    "market/workbench/sections/tune/tune.css": {
+      "_src": "src/pages/market/workbench/sections/tune/index.tsx",
+      "_plan": "批次B(工作台域 5 条):工作台面板样式令牌化后删本条目"
+    },
+    "research/datasets/datasets.css": {
+      "_src": "src/pages/research/Datasets.tsx + src/pages/research/datasets/BuildDrawer.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    },
+    "research/discovery/discovery.css": {
+      "_src": "src/pages/research/FactorMining.tsx + src/pages/research/discovery/ConfigReadonly.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    },
+    "research/factors/factors.css": {
+      "_src": "src/pages/research/FactorLibrary.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    },
+    "research/shared/research-shared.css": {
+      "_src": "src/pages/research/shared/{ListInfinite,ResearchFlowBar}.tsx + src/pages/research/FactorWorkbench.tsx",
+      "_plan": "批次C(research 域 7 条):research 域共享样式令牌化后删本条目"
+    },
+    "research/tasks/tasks.css": {
+      "_src": "src/pages/research/Tasks.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    },
+    "research/validation/run-layout.css": {
+      "_src": "src/pages/research/Backtest.tsx + src/pages/research/FactorEvaluation.tsx + src/pages/research/combine/Combine.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    },
+    "research/workbench.css": {
+      "_src": "src/pages/research/FactorWorkbench.tsx",
+      "_plan": "批次C(research 域 7 条):research 域样式令牌化后删本条目"
+    }
+  },
+  "_g1": {
+    "pages/research/discovery/ResultDetailDrawer.tsx:203": {
+      "_src": "src/pages/research/discovery/ResultDetailDrawer.tsx",
+      "_plan": "Drawer 内固定容器(M1 纪律④,等价 scrollX=false);T-60 未覆盖,待迁移 fillWidth 后删本条"
+    },
+    "pages/research/evaluation/TuneModal.tsx:436": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "Modal 内固定容器(M1 纪律④,等价 scrollX=false)"
+    },
+    "pages/research/factors/FactorDetailDrawer.tsx:450": {
+      "_src": "src/pages/research/factors/FactorDetailDrawer.tsx",
+      "_plan": "Drawer 内固定容器(M1 纪律④,等价 scrollX=false);T-60 未覆盖,待迁移 fillWidth 后删本条"
+    },
+    "pages/research/tasks/summary.tsx:124": {
+      "_src": "src/pages/research/tasks/summary.tsx(ResultContent,消费于 detailDrawer.tsx:135 抽屉内)",
+      "_plan": "任务详情抽屉内固定容器(M1 纪律④,等价 scrollX=false)"
+    },
+    "pages/research/tasks/summary.tsx:245": {
+      "_src": "src/pages/research/tasks/summary.tsx(ResultContent,消费于 detailDrawer.tsx:135 抽屉内)",
+      "_plan": "任务详情抽屉内固定容器(M1 纪律④,等价 scrollX=false)"
+    },
+    "pages/research/tasks/summary.tsx:279": {
+      "_src": "src/pages/research/tasks/summary.tsx(ResultContent,消费于 detailDrawer.tsx:135 抽屉内)",
+      "_plan": "任务详情抽屉内固定容器(M1 纪律④,等价 scrollX=false)"
+    }
+  },
+  "_g2": {
+    "pages/research/evaluation/TuneModal.tsx:333": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "M3 允许的组件内部微调:模态内表单字段对(sm/lg 档),非配置|结果分栏"
+    },
+    "pages/research/evaluation/TuneModal.tsx:353": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "同上:字段对微调(lg 档)"
+    },
+    "pages/research/evaluation/TuneModal.tsx:364": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "同上:字段对微调(lg 档)"
+    },
+    "pages/research/evaluation/TuneModal.tsx:374": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "同上:字段对微调(lg 档)"
+    },
+    "pages/research/evaluation/TuneModal.tsx:384": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "同上:字段对微调(lg 档)"
+    },
+    "pages/research/evaluation/TuneModal.tsx:392": {
+      "_src": "src/pages/research/evaluation/TuneModal.tsx",
+      "_plan": "同上:字段对微调(lg 档)"
+    }
+  },
+  "_g4": {
+    "hooks/useFloatWindow.ts:304": {
+      "_src": "src/hooks/useFloatWindow.ts",
+      "_plan": "浮窗定位钳制(M4 允许:视口宽仅限浮窗/弹层钳制与调试工具)"
+    },
+    "hooks/useFloatWindow.ts:334": {
+      "_src": "src/hooks/useFloatWindow.ts",
+      "_plan": "同上:浮窗钳制"
+    },
+    "hooks/useFloatWindow.ts:382": {
+      "_src": "src/hooks/useFloatWindow.ts",
+      "_plan": "同上:浮窗钳制"
+    },
+    "hooks/useFloatGeometry.ts:168": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "浮窗几何钳制(M4 允许)"
+    },
+    "hooks/useFloatGeometry.ts:184": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "同上:浮窗钳制"
+    },
+    "hooks/useFloatGeometry.ts:211": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "同上:浮窗钳制(行内尾注释前真代码)"
+    },
+    "hooks/useFloatGeometry.ts:268": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "同上:浮窗钳制"
+    },
+    "hooks/useFloatGeometry.ts:293": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "同上:浮窗钳制(行内尾注释前真代码)"
+    },
+    "hooks/useFloatGeometry.ts:350": {
+      "_src": "src/hooks/useFloatGeometry.ts",
+      "_plan": "同上:浮窗钳制"
+    },
+    "components/debug/DebugOverlay.tsx:175": {
+      "_src": "src/components/debug/DebugOverlay.tsx",
+      "_plan": "调试工具(M4 允许)"
+    },
+    "components/debug/DebugOverlay.tsx:179": {
+      "_src": "src/components/debug/DebugOverlay.tsx",
+      "_plan": "同上:调试工具"
+    },
+    "components/debug/DebugPanel.tsx:73": {
+      "_src": "src/components/debug/DebugPanel.tsx",
+      "_plan": "同上:调试工具(拖拽钳制)"
+    },
+    "components/debug/DebugPanel.tsx:87": {
+      "_src": "src/components/debug/DebugPanel.tsx",
+      "_plan": "同上:调试工具(拖拽钳制)"
+    },
+    "components/debug/DebugPanel.tsx:112": {
+      "_src": "src/components/debug/DebugPanel.tsx",
+      "_plan": "同上:调试工具(溢出链诊断输出)"
+    },
+    "components/watchlist/WatchlistFloat.tsx:41": {
+      "_src": "src/components/watchlist/WatchlistFloat.tsx",
+      "_plan": "浮窗锚点钳制(M4 允许)"
+    },
+    "components/watchlist/WatchlistWidget.tsx:55": {
+      "_src": "src/components/watchlist/WatchlistWidget.tsx",
+      "_plan": "浮窗/弹层钳制(M4 允许;同 MultiSelectGrid 既有模式)"
+    },
+    "components/watchlist/WatchlistWidget.tsx:57": {
+      "_src": "src/components/watchlist/WatchlistWidget.tsx",
+      "_plan": "同上:浮窗钳制"
+    },
+    "components/MultiSelectGrid.tsx:55": {
+      "_src": "src/components/MultiSelectGrid.tsx",
+      "_plan": "弹层钳制(M4 允许)"
+    },
+    "components/MultiSelectGrid.tsx:57": {
+      "_src": "src/components/MultiSelectGrid.tsx",
+      "_plan": "同上:弹层钳制"
+    },
+    "utils/debug/debugCore.ts:239": {
+      "_src": "src/utils/debug/debugCore.ts",
+      "_plan": "调试工具(M4 允许)"
+    }
+  },
+  "_g5": {
+    "components/JobBar.tsx:122": {
+      "_src": "src/components/JobBar.tsx",
+      "_plan": "「查看全部任务」为跳转 /tasks 的导航链接(非折叠),文案命中属检测器宽松面"
+    },
+    "pages/research/tasks/detailDrawer.tsx:150": {
+      "_src": "src/pages/research/tasks/detailDrawer.tsx",
+      "_plan": "任务详情参数 JSON 折叠(T-66 裁决保留项)"
+    },
+    "pages/research/tasks/detailDrawer.tsx:154": {
+      "_src": "src/pages/research/tasks/detailDrawer.tsx",
+      "_plan": "同上:Accordion.Item 参数折叠"
+    },
+    "pages/research/tasks/detailDrawer.tsx:155": {
+      "_src": "src/pages/research/tasks/detailDrawer.tsx",
+      "_plan": "同上:Accordion.Control 参数折叠"
+    },
+    "pages/research/tasks/detailDrawer.tsx:156": {
+      "_src": "src/pages/research/tasks/detailDrawer.tsx",
+      "_plan": "同上:Accordion.Panel 参数折叠"
+    }
+  }
+}

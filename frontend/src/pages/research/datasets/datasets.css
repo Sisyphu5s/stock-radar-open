@@ -1,0 +1,15 @@
+/* ===== 数据集页（datasets）局部样式：构建抽屉表单行（布局类，令牌驱动） ===== */
+
+.sr-ds-build-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sr-ds-build-label {
+  width: 64px;
+  flex-shrink: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+}

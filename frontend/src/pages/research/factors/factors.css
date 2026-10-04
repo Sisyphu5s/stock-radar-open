@@ -1,0 +1,24 @@
+/* 因子库页：桌面主表 + 右侧详情 Drawer；移动端只读 */
+.sr-factor-drawer .sr-run-panel {
+  margin-bottom: var(--sr-pad-xl);
+}
+
+/* T-09/T-67 因子分析：echarts 容器高度用 --sr-chart-h-sm 令牌（canvas 需要容器有尺寸才 init；
+   T-67 平铺后三图同高，亮 240 / 暗 200 自动适配） */
+.sr-factor-an-chart {
+  height: var(--sr-chart-h-sm);
+  margin-top: var(--sr-pad-md);
+}
+
+.sr-factor-an-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-pad-xs);
+  margin-top: var(--sr-pad-md);
+}
+
+@media (max-width: 768px) {
+  .sr-factor-drawer {
+    max-width: 100vw;
+  }
+}

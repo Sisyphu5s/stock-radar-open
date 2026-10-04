@@ -1,0 +1,337 @@
+/* ============================================================
+   App 壳层（MainLayout）：100dvh 工作台布局 + 安全区
+   断点与 useViewport 对齐：>=1200 展开侧栏 · 992-1199 图标轨
+   · 768-991 抽屉 · <768 底部导航 + 抽屉
+   壳层结构 = Mantine AppShell(layout="alt")：navbar 全高 + header
+   右侧偏移；滚动区在 AppShell.Main 内的 .sr-content。
+   选择器带 .sr-shell 前缀，确保覆盖 Mantine cssinjs 运行期样式
+   ============================================================ */
+
+.sr-shell {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--sr-bg);
+}
+
+/* 主列：AppShell.Main 承担 header/navbar 的 padding 偏移，内部 .sr-content 滚动 */
+.sr-shell .sr-main {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ===== 侧边栏（展开 / 图标轨共用，Mantine AppShell.Navbar） =====
+   alt 布局下 navbar top:0 全高，品牌/菜单/底部操作直接纵向 flex，
+   底部固定不随菜单滚动位移 */
+.sr-shell .sr-sider {
+  display: flex;
+  flex-direction: column;
+  background: var(--sr-sider-bg) !important;
+  overflow: hidden;
+  width: var(--app-shell-navbar-width);
+  transition: width var(--sr-dur-norm) ease;
+}
+.sr-shell .sr-sider-brand {
+  height: var(--sr-header-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--sr-border);
+  overflow: hidden;
+}
+/* 菜单滚动区（侧栏与抽屉共用） */
+.sr-shell .sr-nav-menu {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+/* 导航项（Mantine NavLink）：几何/悬停/选中态与旧 antd Menu 对齐 */
+.sr-shell .sr-nav-link {
+  border-radius: 6px;
+  margin: 2px 8px;
+  width: calc(100% - 16px);
+  color: var(--sr-text-2);
+}
+.sr-shell .sr-nav-link:hover {
+  background: var(--sr-hover-bg) !important;
+  color: var(--sr-text-1) !important;
+}
+/* 选中态：accent 实底 + on-accent 文字（亮 #1668dc 上白字 / 暗 #4c9aff 上深字，均达标） */
+.sr-shell .sr-nav-link[data-active],
+.sr-shell .sr-nav-link[data-active]:hover {
+  background: var(--sr-accent) !important;
+  color: var(--sr-on-accent) !important;
+}
+/* 折叠态（64px 图标轨）：label 不渲染，图标居中 */
+.sr-shell .sr-sider.sr-nav-collapsed .sr-nav-link {
+  justify-content: center;
+  padding-inline: 0;
+}
+.sr-shell .sr-sider.sr-nav-collapsed .sr-nav-link .sr-nav-link-section {
+  margin-inline-end: 0;
+}
+/* 折叠态图标真正居中：label=undefined 时 Mantine 仍渲染空的 NavLink body(flex:1),
+   会把图标 section 顶到左侧——收起时整体隐藏 body,只剩图标参与 justify-content:center */
+.sr-shell .sr-sider.sr-nav-collapsed .sr-nav-link .mantine-NavLink-body {
+  display: none;
+}
+
+/* 侧栏底部固定区：系统设置 + 系统状态 + 展开/收起（抽屉底部同样复用） */
+.sr-shell .sr-sider-foot {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border-top: 1px solid var(--sr-border);
+}
+.sr-shell .sr-sider-foot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  background: transparent;
+  /* 亮色侧栏自动深色文字、暗色侧栏自动浅色文字（令牌体系随 body[data-theme] 切换） */
+  color: var(--sr-text-2);
+  font-size: 13px;
+  line-height: 1;
+  transition: background var(--sr-dur-fast) ease, color var(--sr-dur-fast) ease;
+}
+.sr-shell .sr-sider-foot-btn:hover { background: var(--sr-hover-bg); color: var(--sr-text-1); }
+.sr-shell .sr-sider-foot-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+/* 收起态（64px 图标轨）：按钮仅图标居中；文字隐藏 */
+.sr-shell .sr-sider.sr-nav-collapsed .sr-sider-foot-btn {
+  justify-content: center;
+  padding: 0;
+  color: var(--sr-text-1);
+}
+.sr-shell .sr-sider.sr-nav-collapsed .sr-sider-foot-btn .sr-foot-btn-label { display: none; }
+.sr-shell .sr-sider.sr-nav-collapsed .sr-sider-foot-btn svg { width: 17px; height: 17px; }
+/* 折叠态脚按钮图标居中：label 隐藏后 Button section 残留 margin-inline-end 4px 会偏心 */
+.sr-shell .sr-sider.sr-nav-collapsed .sr-sider-foot-btn .mantine-Button-section {
+  margin-inline-end: 0;
+}
+
+/* ===== 顶栏（Mantine AppShell.Header；height 由 AppShell header 配置承担） ===== */
+.sr-shell .sr-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+  padding: var(--sr-safe-top) 12px 0;
+  background: var(--sr-card-bg) !important;
+  border-bottom: 1px solid var(--sr-border);
+  flex-shrink: 0;
+}
+/* 路径 = 语义 h1（页面唯一可见名称），视觉保持小字号标题而非大标题 */
+.sr-shell .sr-header-path {
+  margin: 0;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--sr-text-1);
+  flex-shrink: 0;
+  max-width: 36vw;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-shell .sr-header-flex { flex: 1; min-width: 0; }
+.sr-shell .sr-header-search { flex-shrink: 1; min-width: 0; display: flex; }
+.sr-shell .sr-header-ico { flex-shrink: 0; }
+
+/* ===== 内容区（AppShell.Main 内滚动容器） ===== */
+.sr-shell .sr-content {
+  height: 100%;
+  overflow: auto;
+  padding: var(--sr-content-pad);
+  padding-left: max(var(--sr-content-pad), var(--sr-safe-left));
+  padding-right: max(var(--sr-content-pad), var(--sr-safe-right));
+}
+
+/* ===== K 线应用内全屏（T-117）：隐藏壳层 chrome，图表区占满视口 =====
+   MainLayout 在 AppShell 根加 .sr-kline-fs；工作台同时用 .sr-wb-fs 隐藏非图表面板。
+   header/navbar 用 display:none（不动 AppShell 结构防重排）；.sr-main 的
+   padding 由 Mantine CSS-in-JS 的 --app-shell-* 变量注入，必须 !important 覆盖。 */
+.sr-shell.sr-kline-fs .sr-header,
+.sr-shell.sr-kline-fs .sr-sider,
+.sr-shell.sr-kline-fs .sr-bottom-nav {
+  display: none;
+}
+.sr-shell.sr-kline-fs .sr-main {
+  padding: 0 !important;
+}
+.sr-shell.sr-kline-fs .sr-content {
+  padding: 0;
+}
+/* .sr-page-fill 高度按 --sr-page-fill-h 折算（扣 header/底导/padding）——全屏下这些已隐藏，
+   满高页高度须回到 100dvh，否则图表区底部留空 */
+.sr-shell.sr-kline-fs .sr-page-fill {
+  height: 100dvh;
+}
+
+/* ===== 吸顶工具区（Toolbar sticky；列表页筛选常驻；原 tasks.css / research-shared.css 重复块合并于此） ===== */
+.sr-sticky-tools .sr-toolbar-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  padding: 8px 10px;
+  background: var(--sr-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: 8px;
+}
+/* 注：sticky 工具区存在时表头不再吸顶（避免叠压），该行为由 DataTable 组件内
+   insideStickyTools 探测承担（.sr-sticky-tools 祖先检测），原 CSS 规则随 antd 退出删除 */
+
+/* ===== 底部导航（<768） ===== */
+.sr-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  height: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom));
+  padding-bottom: var(--sr-safe-bottom);
+  background: var(--sr-card-bg);
+  border-top: 1px solid var(--sr-border);
+}
+.sr-bottom-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--sr-text-3);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-bottom-item:hover { color: var(--sr-text-1); }
+.sr-bottom-item-active {
+  color: var(--sr-accent);
+}
+.sr-bottom-icon { font-size: 17px; line-height: 1; }
+.sr-bottom-label { font-size: 10px; line-height: 1; }
+
+/* ===== 抽屉内导航（Mantine Drawer 复合组件；768-991 主入口；<768 与底部导航共存） ===== */
+.sr-nav-drawer .sr-drawer-content {
+  background: var(--sr-sider-bg);
+  overflow: hidden;
+}
+.sr-nav-drawer .sr-drawer-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.sr-nav-drawer .sr-nav-menu {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+/* 抽屉头部：品牌行 + 右上角显式关闭按钮（withCloseButton=false 无内建关闭） */
+.sr-nav-drawer .sr-drawer-head {
+  position: relative;
+  flex-shrink: 0;
+}
+.sr-nav-drawer .sr-drawer-close {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--sr-text-2);
+}
+.sr-nav-drawer .sr-drawer-close:hover { color: var(--sr-text-1); }
+
+/* ===== 页面级错误边界（ErrorBoundary） ===== */
+.sr-error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  padding: 24px;
+}
+
+/* ===== 页级操作区 / 工具条吸顶 =====
+   PageHeader 输出的页级操作区（.sr-page-head）：Content 滚动时停在顶栏下方。
+   .sr-toolbar 通过能力类 .sr-toolbar-sticky 显式启用——避免同页多个工具条
+   互相覆盖，也不影响 Dock 面板内部工具条（.sr-dock-tools）与满高页。 */
+.sr-content .sr-page > .sr-page-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--sr-bg);
+}
+/* 页级操作区样式：宽度预算体系已废弃（容器查询由 antd 断点/Flex 承担） */
+.sr-content .sr-page > .sr-page-head {
+  min-width: 0;
+}
+
+/* ===== 路由级 lazy 占位 ===== */
+.sr-route-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+.sr-route-spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--sr-border);
+  border-top-color: var(--sr-accent);
+  /* 旋转周期 0.8s 为循环动画（loading 状态反馈），非过渡档；
+     DESIGN §5 两档仅约束 transition/入场动画，循环类豁免（同 srPulse 1.6s）；
+     且被 index.css 全局 prefers-reduced-motion 规则关闭 */
+  animation: srSpin 0.8s linear infinite;
+}
+@keyframes srSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== sticky 表格：表头吸顶 + 分页吸底由 DataTable 组件内联样式承担（T-45 随 antd 退出删除全局规则） ===== */
+
+/* ===== 移动端（<768）适配 ===== */
+@media (max-width: 768px) {
+  :root {
+    --sr-content-pad: 10px;
+    --sr-bottombar-h: 52px;
+  }
+  .sr-shell .sr-content {
+    /* 底部导航高度 + 安全区，避免内容被遮挡 */
+    padding-bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + 10px);
+  }
+  .sr-shell .sr-header {
+    gap: 4px;
+    padding: var(--sr-safe-top) 8px 0;
+  }
+  .sr-shell .sr-header-path {
+    font-size: 13px;
+    /* 放宽 22vw → 40vw：移动端长路径标题不再被过度截断（配合搜索框放宽后仍可读） */
+    max-width: 40vw;
+  }
+  .sr-page { gap: 10px; }
+  /* 移动端卡片数值区更紧凑 */
+  .sr-stat-card { padding: 10px; }
+}
+
+/* ===== 中等宽度（768-991 抽屉模式）适配 ===== */
+/* T-63 断点对齐：上界 991px 与 useViewport.ts 抽屉档 (min-width:768px) and (max-width:991px) 一致
+   （JS 为准，避免 992px 处档位重叠：CSS 与 JS 各自命中不同档） */
+@media (min-width: 768px) and (max-width: 991px) {
+  .sr-shell .sr-header-path { max-width: 26vw; }
+}

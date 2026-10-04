@@ -1,0 +1,16 @@
+/* ============================================================
+   实时监控结果区(WatchResults.tsx)局部样式:T-44 从 paper.css 拆分。
+   ============================================================ */
+
+/* 停止监控保留最后快照:虚线提示条(区别于运行中的实线区块) */
+.sr-paper-watch-stopped {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  border: 1px dashed var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-block-bg);
+}

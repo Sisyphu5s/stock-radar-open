@@ -1,0 +1,22 @@
+/* ============================================================
+   浮层治理单一事实源（关注提醒 WatchlistWidget + AI 助手 HermesWidget）
+   - 避让常量：launcher/浮窗相对视口边、底部导航、对方控件的全部静态间距收敛于此；
+   - z 序分层：launcher 层恒低于 window 层（重叠时窗口永远压住对方 launcher）；
+     关注(wl)比 copilot 高 1 级，重叠时关注在上（把原渲染顺序语义确定性化，不再碰运气）；
+   - CSS 侧直接引用变量；TS 侧一律经 useFloatGeometry.readCssVar 读取同名变量，
+     禁止在组件/几何模块内散写字面量。改动只改本文件。
+   ============================================================ */
+:root {
+  /* ---- 避让（px）：launcher/浮窗与视口边、底导航、对方控件的最小间距 ---- */
+  --sr-float-edge: 16px;                 /* 右下默认定位距视口边/底导航的基准间距 */
+  --sr-float-cop-launcher-gap: 40px;     /* copilot launcher 距底导航间隙 */
+  --sr-float-wl-launcher-offset: 48px;   /* 关注 launcher 高于 copilot launcher 的间距 */
+  --sr-float-bottom-clearance: 60px;     /* copilot 底停靠对右下浮窗默认区的避让；关注浮窗默认底距 */
+  --sr-float-sheet-gap: 8px;             /* 移动端底部 sheet 距底导航间隙 */
+
+  /* ---- z 序分层（launcher < window；关注 = copilot + 1） ---- */
+  --sr-float-z-cop-launcher: 900;
+  --sr-float-z-cop-window: 950;
+  --sr-float-z-wl-launcher: 901;
+  --sr-float-z-wl-window: 951;
+}

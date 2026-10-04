@@ -1,0 +1,120 @@
+/* ============================================================
+   信号时间线（TimelinePanel 组件专属，自 stock.css 迁入）：
+   过滤器行固定、列表区内滚动
+   ============================================================ */
+
+.sr-wb-tl {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.sr-wb-tl-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-sm);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding-bottom: var(--sr-pad-sm);
+  border-bottom: 1px solid var(--sr-border);
+}
+.sr-wb-tl-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-top: var(--sr-pad-sm);
+}
+.sr-wb-tl-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px var(--sr-pad-sm);
+  border-radius: var(--sr-card-radius);
+  cursor: pointer;
+  min-width: 0;
+}
+.sr-wb-tl-row:hover {
+  background: var(--sr-block-bg);
+}
+.sr-wb-tl-time {
+  flex-shrink: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sr-wb-tl-time-hint {
+  margin-left: 4px;
+  color: var(--sr-text-3);
+}
+.sr-wb-tl-sigs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+.sr-wb-tl-sigs .sr-wb-tl-badge {
+  font-size: var(--sr-font-xs);
+}
+.sr-wb-tl-price {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sr-wb-tl-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--sr-text-3);
+  font-size: var(--sr-font-meta);
+  display: inline-flex;
+}
+/* T-117 定位到 K 线（程序化十字线）：与展开箭头同档尺寸，hover 强调色反馈 */
+.sr-wb-tl-locate {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  color: var(--sr-text-3);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px;
+}
+.sr-wb-tl-locate:hover {
+  color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 12%, transparent);
+}
+.sr-wb-tl-detail {
+  margin: 0 var(--sr-pad-sm) var(--sr-pad-sm);
+  padding: var(--sr-pad-sm) var(--sr-pad-sm);
+  background: var(--sr-block-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+}
+.sr-wb-tl-moment {
+  margin-bottom: var(--sr-pad-sm);
+}
+.sr-wb-tl-ev {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  font-size: var(--sr-font-xs);
+  line-height: 1.7;
+}
+.sr-wb-tl-ev + .sr-wb-tl-ev {
+  margin-top: 2px;
+}
+.sr-wb-tl-ev-key {
+  flex-shrink: 0;
+  color: var(--sr-text-3);
+}
+.sr-wb-tl-ev-val {
+  min-width: 0;
+  color: var(--sr-text-1);
+}

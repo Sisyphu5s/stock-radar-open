@@ -1,0 +1,174 @@
+/* ============================================================
+   模拟盘共享布局(paper-shared.css):跨组件共用的页面/区块/统计卡类。
+   由 T-44 从 pages/market/paper.css 拆分(2026-08-14):
+   组件独占类已随各组件迁入同级 css(PaperTrading.css / ParamSummary.css /
+   ProjectWizard.css / WatchResults.css),此处仅留多组件共用类。
+   全部颜色走 --sr-* 变量(亮/暗双主题自动适配)。
+   ============================================================ */
+
+.sr-paper-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-page);
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+/* ---- 页面级状态区(空态 / 加载 / 错误):fill 场景占满剩余高度居中 ---- */
+.sr-paper-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sr-pad-lg);
+  padding: clamp(24px, 5vw, 48px) 0;
+  min-height: 180px;
+  flex: 1 1 auto;
+}
+
+/* ---- 结果区:占满剩余高度,内部滚动(fill 满高) ---- */
+.sr-paper-results {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-card);
+  min-width: 0;
+  padding-right: 2px;
+}
+.sr-paper-results-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-card);
+  min-width: 0;
+}
+
+/* ---- 实验统计卡(平面块,非嵌套卡片) ---- */
+.sr-paper-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  min-width: 0;
+}
+.sr-paper-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.sr-paper-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--sr-gap-row);
+  min-width: 0;
+}
+.sr-paper-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+  padding: var(--sr-pad-lg) var(--sr-pad-xl);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+}
+.sr-paper-stat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+}
+.sr-paper-stat-rows {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: var(--sr-gap-ctl) var(--sr-pad-lg);
+  min-width: 0;
+}
+
+/* 明细表:桌面/移动共用(移动靠表格横向滚动),扁平无套卡 */
+.sr-paper-detail-table .sr-dt-table {
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+}
+
+/* watch 历史价格曲线容器(echarts/lightweight 需明确高度;高度令牌化 --sr-chart-h-sm) */
+.sr-paper-chart {
+  width: 100%;
+  height: var(--sr-chart-h-sm);
+  min-width: 0;
+}
+
+/* 指标快照:紧凑网格(无卡片套卡,扁平单元) */
+.sr-paper-snap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+}
+.sr-paper-snap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-block-bg);
+}
+
+/* 当前触发标签区:命中时强调描边,未命中置灰 */
+.sr-paper-hits {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+  padding: var(--sr-pad-md) var(--sr-pad-lg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+}
+.sr-paper-hits.sr-paper-hits-on {
+  border-color: var(--sr-accent);
+}
+
+/* 最近触发点列表 */
+.sr-paper-trig-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-pad-xs);
+  min-width: 0;
+}
+.sr-paper-trig-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-lg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-card-bg);
+}
+.sr-paper-trig-date {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .sr-paper-stats {
+    grid-template-columns: 1fr;
+  }
+  .sr-paper-snap {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+  .sr-paper-chart {
+    height: var(--sr-chart-h-sm);
+  }
+}

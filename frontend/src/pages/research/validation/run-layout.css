@@ -1,0 +1,57 @@
+/* 研究运行页共享布局（FactorEvaluation / Backtest / Combine 共用）：
+   分栏/堆叠决策已由 ResearchSplit 组件(M3 容器实测宽驱动)接管，
+   本文件只保留结果区/图表/步骤条等非分栏样式。
+   .sr-run-panel/.sr-run-panel-title 基础样式已上移 shared/research-shared.css（FactorWorkbench 壳恒挂载）。 */
+
+/* 结果 Tabs：固定字号，简洁导航（Mantine Tabs.List + 自定义面板区 .sr-results-panels） */
+.sr-results-tabs .sr-results-tabs-list {
+  margin-bottom: var(--sr-pad-lg);
+  border-bottom: 1px solid var(--sr-border);
+}
+.sr-results-tabs .sr-results-tabs-tab {
+  font-size: var(--sr-font-sm);
+}
+.sr-results-panels {
+  min-width: 0;
+}
+.sr-results-tabpane {
+  min-width: 0;
+}
+
+/* 图表容器：固定高度（--sr-chart-h-*），不随内容抖动 */
+.sr-chart-box-sm {
+  width: 100%;
+  height: var(--sr-chart-h-sm);
+}
+.sr-chart-box-md {
+  width: 100%;
+  height: var(--sr-chart-h-md);
+}
+
+/* 指标网格（已上移 index.css 全局基板 .sr-metric-grid，不再重复定义） */
+
+/* 发布步骤条：扁平三格，不嵌套 Card */
+.sr-publish-steps {
+  display: flex;
+  gap: var(--sr-pad-lg);
+  flex-wrap: wrap;
+}
+.sr-publish-step {
+  flex: 1 1 200px;
+  min-width: 200px;
+  padding: var(--sr-pad-lg) var(--sr-pad-xl);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+}
+.sr-publish-step.is-done {
+  /* 发布完成=成功语义 → --sr-success（非涨跌色 --sr-down） */
+  border-color: var(--sr-success);
+}
+
+/* 历史记录卡片（回测页结果入口） */
+.sr-history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--sr-pad-md);
+}

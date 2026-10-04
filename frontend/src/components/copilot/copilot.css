@@ -1,0 +1,299 @@
+/* ============================================================
+   AI 助手浮窗（HermesWidget → components/copilot/*）
+   局部样式：仅本目录组件使用；无渐变 / 大圆角 / 卡套卡。
+   类前缀 .sr-cop-*
+   ============================================================ */
+
+/* 整体纵向布局：标题条 / 会话标签 / 消息区 / 输入区 */
+.sr-cop {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--sr-bg);
+}
+
+/* 标题条：品牌 + 操作按钮（清空 / 新建 / 关闭） */
+.sr-cop-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  flex-shrink: 0;
+}
+.sr-cop-head-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 会话标签条：横向滚动，多会话切换 / 双击重命名 */
+.sr-cop-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--sr-border);
+  flex-shrink: 0;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+.sr-cop-tabs::-webkit-scrollbar { display: none; }
+.sr-cop-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 150px;
+  padding: 2px 6px 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--sr-border);
+  background: transparent;
+  color: var(--sr-text-2);
+  font-size: 11px;
+  line-height: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+.sr-cop-tab:hover { background: var(--sr-hover-bg); color: var(--sr-text-1); }
+.sr-cop-tab-active {
+  background: var(--sr-hover-bg);
+  border-color: var(--sr-accent);
+  color: var(--sr-text-1);
+}
+.sr-cop-tab-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.sr-cop-dot-market { background: var(--sr-accent); }
+.sr-cop-dot-research { background: #7c3aed; }
+body[data-theme='dark'] .sr-cop-dot-research { background: #a78bfa; }
+.sr-cop-tab-title { overflow: hidden; text-overflow: ellipsis; max-width: 90px; }
+.sr-cop-tab-close {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--sr-text-3);
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sr-cop-tab-close:hover { background: var(--sr-hover-bg); color: var(--sr-text-1); }
+.sr-cop-tab-new {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px dashed var(--sr-border);
+  border-radius: 4px;
+  background: none;
+  color: var(--sr-text-2);
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sr-cop-tab-new:hover { border-color: var(--sr-accent); color: var(--sr-accent); }
+.sr-cop-rename {
+  width: 92px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 11px;
+  border-radius: 4px;
+  border: 1px solid var(--sr-accent);
+  outline: none;
+  color: var(--sr-text-1);
+  background: var(--sr-card-bg);
+}
+
+/* 消息区 + 输入区：Bubble.List / Welcome+Prompts 占弹性区，Sender 贴底 */
+.sr-cop-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.sr-cop-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.sr-cop-sender { flex-shrink: 0; }
+
+/* 空态：Welcome + Prompts 垂直居中 */
+.sr-cop-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  padding: 4px;
+}
+
+/* 助手气泡 footer 动作：复制 / 填入表达式 / 重试 */
+.sr-cop-msg-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 2px;
+  align-items: center;
+}
+/* 消息元信息（时间 · token 估算）：靠左占位，把操作按钮推到右侧 */
+.sr-cop-msg-meta {
+  margin-right: auto;
+  font-size: 11px;
+  line-height: 20px;
+  color: var(--sr-text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 长回复可读性（T-93）：pre-wrap 保留段落/换行；折叠按钮小号弱化 */
+.sr-cop-msg-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.sr-cop-msg-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.sr-cop-msg-expand {
+  padding: 0 4px !important;
+  height: 20px !important;
+  font-size: 11px !important;
+  line-height: 20px !important;
+  color: var(--sr-accent) !important;
+}
+
+/* 头像（供 Bubble role.avatar 复用；扁平：无渐变、圆角 ≤6px） */
+.sr-cop-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  background: var(--sr-block-bg);
+  color: var(--sr-text-2);
+  font-size: 13px;
+}
+.sr-cop-avatar-assistant {
+  background: var(--sr-accent);
+  /* 前景走 --sr-on-accent：暗色 accent 底(#4c9aff)上白字仅 2.85:1，改深字达标 */
+  color: var(--sr-on-accent);
+}
+
+/* ============================================================
+   可拖动 launcher：原生 button，位移 >5px 视为拖动（不触发打开），
+   释放吸附左/右；点击展开浮动浮窗。默认右侧、底部导航上方。
+   ============================================================ */
+.sr-cop-launcher {
+  position: fixed;
+  right: var(--sr-float-edge);
+  bottom: calc(var(--sr-float-cop-launcher-gap) + var(--sr-bottombar-h) + var(--sr-safe-bottom));
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sr-accent);
+  /* 前景走 --sr-on-accent：暗色 accent 底(#4c9aff)上白图标仅 2.85:1（非文本 3:1 也不达标），改深色达标 */
+  color: var(--sr-on-accent);
+  border: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  font-size: 16px;
+  z-index: var(--sr-float-z-cop-launcher);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.25);
+  transition: filter .15s ease;
+}
+.sr-cop-launcher:hover { filter: brightness(1.1); }
+.sr-cop-launcher:active { filter: brightness(0.95); }
+.sr-cop-launcher-dragging { cursor: grabbing; }
+/* 面板打开时隐藏，避免遮挡浮窗 */
+.sr-cop-launcher-hidden { visibility: hidden; pointer-events: none; }
+
+/* ============================================================
+   可移动停靠浮窗（替代 Drawer）：宽度 min(400px, calc(100vw - 32px))、
+   可用高度内；非模态，无遮罩。移动端（<768）为底部 sheet。
+   ============================================================ */
+.sr-cop-window {
+  position: fixed;
+  z-index: var(--sr-float-z-cop-window);
+  display: flex;
+  flex-direction: column;
+  /* 宽度自适应视口（≥768 桌面恒为 400px，窄屏收缩到视口减 32px；与 copilotGeometry.WINDOW_WIDTH 一致） */
+  width: min(400px, calc(100vw - 32px));
+  /* 高度：可用高度内取整（几何常量 WINDOW_MAX_HEIGHT=600 / WINDOW_V_MARGIN=40） */
+  height: min(600px, calc(100dvh - 40px));
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  box-shadow: var(--sr-float-shadow);
+  overflow: hidden;
+  color: var(--sr-text-1);
+}
+.sr-cop-window:focus { outline: none; }
+.sr-cop-window .sr-cop { height: 100%; }
+/* 空闲时过渡：拖拽释放吸附/停靠菜单切换更平滑（拖动期间移除） */
+.sr-cop-window-idle { transition: left .18s ease, top .18s ease; }
+
+/* 标题栏 = 拖拽柄（仅桌面）；touch-action 限制在柄与 launcher 上 */
+.sr-cop-window-head {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.sr-cop-window-head:active { cursor: grabbing; }
+.sr-cop-window-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--sr-text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 移动端（<768）：底部 sheet，位于底部导航 + 安全区上方 */
+@media (max-width: 768px) {
+  .sr-cop-window {
+    left: 8px;
+    right: 8px;
+    bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + var(--sr-float-sheet-gap));
+    width: auto;
+    height: min(72dvh, 560px);
+  }
+  .sr-cop-window-head { cursor: default; touch-action: auto; user-select: auto; }
+}
+/* 矮视口（横屏等）：sheet 全屏 */
+@media (max-width: 768px) and (max-height: 520px) {
+  .sr-cop-window {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100dvh;
+  }
+}

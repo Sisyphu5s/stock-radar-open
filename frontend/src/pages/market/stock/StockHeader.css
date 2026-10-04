@@ -1,0 +1,57 @@
+/* ============================================================
+   个股固定实体头（StockHeader 组件专属，自 stock.css 迁入）
+   ============================================================ */
+
+.sr-stk-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+  background: var(--sr-card-bg);
+}
+.sr-stk-header-id {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.sr-stk-header-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.sr-stk-header-vr {
+  color: var(--sr-text-2);
+  font-size: var(--sr-font-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sr-stk-header-meta {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--sr-text-3);
+  white-space: nowrap;
+}
+.sr-stk-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .sr-stk-header {
+    gap: 8px 12px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+  }
+  .sr-stk-header-meta { order: 3; width: 100%; }
+}

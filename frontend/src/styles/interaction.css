@@ -1,0 +1,116 @@
+/* ============================================================
+   interaction.css：HScroll 可横滚容器 + Debug 布局检测面板
+   （在 index.css / layout.css / ui-polish.css 之后加载，可覆盖）
+   ============================================================ */
+
+/* ===== HScroll：可横滚容器（隐藏滚动条 + 悬浮左右按钮） ===== */
+.sr-hscroll {
+  position: relative;
+  min-width: 0;
+}
+.sr-hscroll-inner {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sr-hscroll-inner::-webkit-scrollbar { display: none; }
+
+/* 左右按钮：28px 圆形半透明，浮于左右两侧垂直居中；默认隐藏，hover/focus 显现 */
+.sr-hscroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sr-border);
+  background: color-mix(in srgb, var(--sr-card-bg) 88%, transparent);
+  color: var(--sr-text-2);
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  /* 原 0.18s 介于两档之间，就近归入 fast 档（--sr-dur-fast 120ms，DESIGN §5） */
+  transition: opacity var(--sr-dur-fast) ease;
+}
+.sr-hscroll-btn.sr-hscroll-prev { left: 4px; }
+.sr-hscroll-btn.sr-hscroll-next { right: 4px; }
+.sr-hscroll-btn:disabled {
+  opacity: 0.25 !important;
+  pointer-events: none;
+}
+/* 无横向可滚时整组隐藏；有可滚（.sr-hscroll-has）时默认不可见、hover/focus 显现 */
+.sr-hscroll:not(.sr-hscroll-has) .sr-hscroll-btn { display: none; }
+.sr-hscroll.sr-hscroll-has:hover .sr-hscroll-btn:not(:disabled),
+.sr-hscroll.sr-hscroll-has .sr-hscroll-btn:not(:disabled):focus-visible {
+  opacity: 1;
+}
+/* 触摸设备（无 hover）恒显示；T-127:按钮缩至 24px/更透明/贴角更近,
+   减小对首末列内容的遮挡(原生滑动仍可滚动,仅缩小覆盖区) */
+@media (hover: none) {
+  .sr-hscroll.sr-hscroll-has .sr-hscroll-btn {
+    opacity: 0.7;
+    width: 24px;
+    height: 24px;
+  }
+  .sr-hscroll-btn.sr-hscroll-prev { left: 2px; }
+  .sr-hscroll-btn.sr-hscroll-next { right: 2px; }
+}
+
+/* ===== TagBar 接入 HScroll：基板自身横滚让位给内层 ===== */
+/* 常规标签行：不收缩成单行压缩，由 HScroll 内层统一横滚（按钮生效的前提） */
+.sr-hscroll-inner > .sr-tagbar {
+  min-width: max-content;
+  overflow: visible;
+}
+/* 权重面板分类条：保持「标签 + 条目整行一起横滚」（外层 .sr-weight-cats-row 滚动） */
+.sr-weight-cats-row > .sr-hscroll {
+  flex-shrink: 0;
+  min-width: 0;
+}
+.sr-weight-cats-row .sr-hscroll-inner > .sr-tagbar {
+  padding-bottom: 0;
+}
+
+/* ===== Debug 布局检测面板 ===== */
+/* 【待 fe-dbg-ui 合并】贴边计数承载已并入 components/debug/DebugPanel（本地占位，复用本面板样式）。
+   本段样式暂保留：visual 模式 UI 加载失败时仍由 MainLayout 内置面板兜底；
+   待 UI 实例自带样式接管后整段标记废弃删除（先清除占位组件，再清本段，勿提前删）。 */
+.sr-debug-panel {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--sr-bottombar-h) + var(--sr-safe-bottom) + 96px);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 59, 48, 0.45);
+  border-radius: var(--sr-card-radius);
+  background: color-mix(in srgb, var(--sr-card-bg) 92%, transparent);
+  box-shadow: var(--sr-card-shadow);
+  pointer-events: none;
+  user-select: none;
+}
+.sr-debug-panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff3b30;
+}
+.sr-debug-panel-sub {
+  font-size: 11px;
+  color: var(--sr-text-3);
+}
+.sr-debug-panel-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sr-text-1);
+  font-variant-numeric: tabular-nums;
+}

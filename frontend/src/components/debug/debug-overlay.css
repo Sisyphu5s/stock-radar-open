@@ -1,0 +1,61 @@
+/* ============================================================
+   DebugOverlay 覆盖层样式
+   - 全屏诊断层,z-index 1900(低于 Debug 面板 2000)
+   - pointer-events:none,canvas/DOM 标签均不拦截页面交互
+   - 颜色全部走 --sr-* 令牌(canvas 内部颜色为 JS 常量,见 DebugOverlay.tsx)
+   ============================================================ */
+.sr-dbg-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1900;
+  pointer-events: none;
+  user-select: none;
+}
+.sr-dbg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sr-dbg-labels {
+  position: absolute;
+  inset: 0;
+}
+.sr-dbg-tag,
+.sr-dbg-coord,
+.sr-dbg-measure-label,
+.sr-dbg-hl-label {
+  position: absolute;
+  white-space: pre-line;
+  line-height: 1.4;
+  padding: 2px 6px;
+  border-radius: var(--sr-radius-tag);
+  background: var(--sr-card-bg);
+  box-shadow: var(--sr-card-shadow);
+  font-size: var(--sr-font-xs);
+}
+/* 悬停元素 tooltip:tag 描述 + WxH */
+.sr-dbg-tag {
+  color: var(--sr-text-1);
+  border: 1px solid var(--sr-accent);
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+/* 选中元素坐标标签:绝对 + 相对 offsetParent 双行 */
+.sr-dbg-coord {
+  color: var(--sr-text-2);
+  border: 1px dashed var(--sr-accent);
+  font-variant-numeric: tabular-nums;
+}
+/* 测量距离标签(dx/dy/距离) */
+.sr-dbg-measure-label {
+  color: var(--sr-error);
+  border: 1px solid color-mix(in srgb, var(--sr-error) 55%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+/* 碰撞高亮标签 */
+.sr-dbg-hl-label {
+  color: var(--sr-text-1);
+  border: 1px solid var(--sr-warning);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

@@ -1,0 +1,109 @@
+/* 多股对比页（/compare）：样式全走 --sr-* 令牌，暗色自动适配（组件目录内自建，不入全局） */
+
+/* 页头选择器区：MultiSelect 占主宽 + 右侧提示 */
+.cmp-selector {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-card);
+  flex-wrap: wrap;
+}
+.cmp-pick {
+  flex: 1 1 320px;
+  min-width: 260px;
+  max-width: 560px;
+}
+
+/* T-52 满高页：卡组容器占满剩余高度（PageShell fill 直接子级）；
+   指标/相关卡弹性分配剩余空间，卡体纵向弹性 + 内部滚动（内容超高不裁切，净高图卡保持固定高） */
+.cmp-stack {
+  flex: 1;
+  min-height: 0;
+}
+.cmp-fill-card {
+  flex: 1;
+  min-height: 0;
+}
+.cmp-fill-card > div:last-child {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* 归一化净值图容器 */
+.cmp-chart {
+  width: 100%;
+  height: var(--sr-chart-h-lg);
+}
+
+/* 指标对比：每股一列（列头 = 色点 + 名称 + 代码），列内 StatStrip（4 项指标纵向堆叠） */
+.cmp-metrics {
+  display: grid;
+  gap: var(--sr-gap-card);
+  align-items: stretch;
+  min-width: 0;
+}
+.cmp-metrics-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  min-width: 0;
+}
+.cmp-metrics-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-sm);
+  padding: var(--sr-pad-xs) var(--sr-pad-sm) var(--sr-pad-sm);
+  border-bottom: 1px solid var(--sr-border);
+}
+.cmp-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.cmp-metrics-name {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cmp-metrics-code {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
+/* 相关性矩阵：网格 + 1px 缝隙制造细边框（底色 = --sr-border，单元格 = 卡片底色） */
+.cmp-correlation {
+  display: grid;
+  gap: 1px;
+  background: var(--sr-border);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  overflow: hidden;
+}
+.cmp-corr-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sr-pad-sm) var(--sr-pad-xs);
+  font-size: var(--sr-font-xs);
+  font-variant-numeric: tabular-nums;
+  background: var(--sr-card-bg);
+  min-width: 0;
+  color: var(--sr-text-1);
+}
+.cmp-corr-head {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: flex-start;
+}
+.cmp-corr-dim {
+  color: var(--sr-text-3);
+}

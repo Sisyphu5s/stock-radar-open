@@ -1,0 +1,66 @@
+/* ============================================================
+   DataTable(components/ui/DataTable.tsx)组件级样式
+   (P2-21 由运行时 appendChild 注入迁移至主样式体系):
+   视觉对齐现状 antd 全局表格样式,全部 --sr-* 令牌;
+   规则与选择器名与注入版完全一致(audit 白名单/选择器依赖不破)。
+   ============================================================ */
+
+.sr-dt-table { --table-border-color: var(--sr-border); }
+.sr-dt-table th { background: var(--sr-hover-bg); color: var(--sr-text-2); font-weight: 600; letter-spacing: .2px; font-size: var(--sr-font-sm); }
+.sr-dt-table td { font-size: var(--sr-font-sm); font-variant-numeric: tabular-nums; }
+.sr-dt-table thead th { z-index: 3; }
+.sr-dt-table tbody tr.sr-dt-zebra > td { background: var(--sr-zebra-bg); }
+.sr-dt-table tbody tr:hover > td { background: var(--sr-hover-bg) !important; }
+.sr-dt-table th.sr-dt-sortable { cursor: pointer; user-select: none; }
+.sr-dt-table .sr-dt-ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* T-51 激活排序列单元格强调:accent 8% 混合透明底(亮/暗双主题可用);
+   半透明叠加在行背景(zebra/卡片)之上,保持斑马纹区分度;
+   hover 行仍由上方 --sr-hover-bg !important 规则覆盖(其优先级最高) */
+.sr-dt-table tbody td.sr-dt-sorted,
+.sr-dt-table tbody tr.sr-dt-zebra > td.sr-dt-sorted {
+  background: color-mix(in srgb, var(--sr-accent) 8%, transparent);
+}
+
+/* T-118 virtual 双表结构:吸顶表头 div——实体背景遮住滚过的行(表头表格自身的
+   --sr-hover-bg 只覆盖 th 单元格)+ 底部分隔线(替代单表 thead 行边框) */
+.sr-dt-vhead {
+  background: var(--sr-card-bg);
+  border-bottom: 1px solid var(--sr-border);
+}
+
+/* T-52 grow 模式(DataTable grow prop):表格区撑满容器剩余高度。
+   链 = .sr-table-scroll.sr-dt-grow(自身 flex:1 + 纵向 flex)→ .sr-hscroll(flex:1 纵向 flex)
+   → .sr-hscroll-inner(flex:1)→ viewport(flex:1 + min-height:0,行内样式);
+   分页条/排序提示为兄弟节点自然占位,viewport 分得剩余高度,内部 RO 实测值回填 scrollY。
+   需父链纵向弹性(fill 页 PageShell fill 或等价 flex 链),否则 flex:1 无生效空间。 */
+.sr-table-scroll.sr-dt-grow {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sr-table-scroll.sr-dt-grow > .sr-hscroll {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sr-table-scroll.sr-dt-grow .sr-hscroll-inner {
+  flex: 1;
+  min-height: 0;
+}
+
+/* T-52 满高页弹性链辅助类(.sr-page-fill 限定,flow 页不生效):
+   容器(表格卡/卡组)加 .sr-fill-flex 占满剩余高度,其末子节点一并纵向弹性
+   (承载 PageTableBlock 卡体等结构,内放 DataTable grow)。 */
+.sr-page-fill > .sr-fill-flex {
+  flex: 1;
+  min-height: 0;
+}
+.sr-page-fill > .sr-fill-flex > :last-child {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}

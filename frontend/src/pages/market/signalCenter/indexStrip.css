@@ -1,0 +1,43 @@
+/* 全球核心指数条（T-73）：SignalCenter L0 结论条之下的横向指数条。
+ * 样式纪律：仅用 --sr-* 令牌，不写硬编码色；数字 tabular-nums；窄屏 flex-wrap。 */
+.sr-index-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sr-pad-xs) var(--sr-pad-lg);
+  align-items: center;
+  padding: var(--sr-pad-sm) var(--sr-pad-lg);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  margin-bottom: var(--sr-gap-row);
+  flex-shrink: 0;
+}
+
+.sr-index-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.sr-index-name {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  white-space: nowrap;
+}
+
+.sr-index-price {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.sr-index-pct {
+  font-size: var(--sr-font-xs);
+  font-weight: 500;
+  opacity: 0.85;
+}

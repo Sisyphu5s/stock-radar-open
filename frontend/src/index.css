@@ -1,0 +1,383 @@
+/* ============================================================
+   Stock Radar 全局视觉：中性平面 · 工作台式
+   - 无渐变、无装饰性投影；行情红绿、命令蓝、警告琥珀
+   - 卡片圆角 ≤ 6px，字号固定档位（不随容器 clamp）
+   - 完整 focus-visible / 表格 / 移动端规则，暗色可用
+   - 令牌变量统一来自 src/theme/tokens.css（由 src/theme/tokens.ts 生成，
+     亮色 :root + 暗色 body[data-theme='dark'] + 紧凑 body[data-density='compact']）
+   ============================================================ */
+
+@import './theme/tokens.css';
+
+/* 主题色彩方案标记（变量体系见 tokens.css；暗色滚动条覆盖规则保留于此） */
+body[data-theme='light'] { color-scheme: light; }
+
+body[data-theme='dark'] {
+  color-scheme: dark;
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.35);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.5);
+  }
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--sr-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== 焦点可见性（完整 focus 规则，WCAG 2.4.7） ===== */
+/* 焦点环跟随 --sr-accent 令牌（亮 #1668dc / 暗 #4c9aff，暗色在 #0d1117 上 6.6:1 ≥ 4.5:1） */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--sr-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== 表格 ===== */
+/* 斑马纹单一实现:DataTable 薄壳按真实 index 补 sr-dt-zebra(运行时注入 CSS),
+   视觉值单一事实源 --sr-zebra-bg(P2-12 双实现清理) */
+
+/* 数值溢出保护：卡片数值（表格单元格由 DataTable 薄壳内联样式承担） */
+.sr-stat-card > div:nth-child(2) {
+  font-variant-numeric: tabular-nums;
+}
+.sr-stat-card > div:nth-child(2) {
+  font-size: var(--sr-font-head);
+}
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 24, 40, 0.16);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(16, 24, 40, 0.3); }
+
+/* ===== 涨跌色 ===== */
+.sr-up { color: var(--sr-up) !important; }
+.sr-down { color: var(--sr-down) !important; }
+
+/* ===== 状态语义色（成功/错误，与涨跌色严格分离） ===== */
+.sr-success { color: var(--sr-success) !important; }
+.sr-error { color: var(--sr-error) !important; }
+
+/* ===== 信号徽标脉冲点 ===== */
+.sr-signal-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 5px;
+  vertical-align: 1px;
+  animation: srPulse 1.6s ease-in-out infinite;
+}
+@keyframes srPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.72); }
+}
+
+/* ===== 退出完成页背景（扁平，无渐变） ===== */
+.sr-exit-bg {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sr-sider-bg);
+}
+
+/* ===== 品牌标识文字：亮色侧栏（浅底）走 --sr-text-* 令牌保证对比度；暗色侧栏（深底）覆盖为白字 */
+.sr-logo-title { color: var(--sr-text-1); }
+.sr-logo-sub { color: var(--sr-text-2); }
+body[data-theme='dark'] .sr-logo-title { color: #fff; }
+body[data-theme='dark'] .sr-logo-sub { color: rgba(255, 255, 255, 0.55); }
+
+/* ===== 统计小卡片 ===== */
+.sr-stat-card {
+  border-radius: var(--sr-card-radius);
+  padding: var(--sr-pad-xl) 14px;
+  background: var(--sr-card-bg);
+  box-shadow: var(--sr-card-shadow);
+  border: 1px solid var(--sr-border);
+  transition: box-shadow var(--sr-dur-fast) ease;
+}
+.sr-stat-card:hover {
+  box-shadow: var(--sr-card-hover-shadow);
+}
+
+/* ===== KaTeX 专业排版微调 ===== */
+.katex-display {
+  margin: 0.4em 0 !important;
+}
+.katex {
+  font-size: 1.12em;
+}
+.katex-display .katex {
+  font-size: 1.35em;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===== 响应式：窄屏隐藏次要元素（与 MainLayout 断点对齐） ===== */
+@media (max-width: 768px) {
+  .sr-hide-sm { display: none !important; }
+}
+
+/* Copilot 消息复制按钮：悬停行时显示 */
+.sr-copy-btn { opacity: 0; transition: opacity var(--sr-dur-norm); color: var(--sr-text-2); }
+.sr-copy-btn:hover { opacity: 1; }
+
+/* 任务中心（JobBar）列表行 */
+.sr-task-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border-bottom: 1px solid var(--sr-border);
+  cursor: pointer;
+  transition: background var(--sr-dur-fast) ease;
+}
+.sr-task-row:hover { background: var(--sr-hover-bg); }
+
+/* ===== 动效全局开关：prefers-reduced-motion 时关闭全部动画/过渡（一处实现，DESIGN §5.4） =====
+   注：srPulse 1.6s 为「信号未读」唯一循环豁免（DESIGN §5.3），同样被本规则关闭 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   设计系统地基：相对位置 + 数据处理工具风格
+   ============================================================ */
+
+/* 通用工具类（布局一律 flex/grid + 相对单位，禁止固定像素定义主容器宽度） */
+.sr-page { display: flex; flex-direction: column; gap: var(--sr-gap-page); width: 100%; min-width: 0; }
+.sr-page-fill { height: var(--sr-page-fill-h); overflow: hidden; }  /* 满高页（dock/满高表格页） */
+.sr-page-head { display: flex; align-items: center; gap: var(--sr-gap-card); flex-wrap: wrap; padding: 2px 0 0; }
+.sr-toolbar { display: flex; flex-wrap: wrap; gap: var(--sr-gap-ctl); align-items: center; }
+.sr-toolbar-compact { gap: 6px; }
+.sr-toolbar-scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.sr-toolbar-scroll::-webkit-scrollbar { display: none; }
+/* 工具条/面板标题右侧动作区：靠右、单行不换行、不收缩（替代内联 marginLeft:auto 样式） */
+.sr-toolbar-tail {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  white-space: nowrap;
+}
+
+/* TagBar 基板：分类筛选条（CheckableTag 行，横向滚动） */
+.sr-tagbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.sr-tagbar::-webkit-scrollbar { display: none; }
+
+/* TriStateGroup 基板：三态按钮组 */
+.sr-tristate {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sr-ctl-h { height: var(--sr-ctl-h) !important; }   /* 工具条控件统一高度 */
+.sr-chart { width: 100%; height: var(--sr-chart-h-md); }
+.sr-num-col { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ===== MultiSelectGrid 多选下拉网格（.sr-msgrid-*） ===== */
+.sr-msgrid {
+  width: var(--sr-msgrid-w);
+  max-width: calc(100vw - 32px);
+  padding: 8px;
+}
+.sr-msgrid-search {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--sr-border);
+}
+.sr-msgrid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.sr-msgrid-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: var(--sr-radius-ctl);
+  border: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  color: var(--sr-text-2);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color var(--sr-dur-fast) ease, background var(--sr-dur-fast) ease, color var(--sr-dur-fast) ease;
+}
+.sr-msgrid-item:hover {
+  border-color: var(--sr-accent);
+  color: var(--sr-text-1);
+}
+.sr-msgrid-item-active {
+  border-color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 14%, transparent);
+  color: var(--sr-text-1);
+  font-weight: 500;
+}
+.sr-msgrid-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sr-msgrid-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-msgrid-empty {
+  padding: 18px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--sr-text-3);
+}
+/* 分组模式（选项带 group 字段时启用）：组标题 + 组内网格；滚动/搜索沿用 .sr-msgrid-grid */
+.sr-msgrid-grid-grouped {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sr-msgrid-group-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px 6px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--sr-border);
+  font-size: 11px;
+  color: var(--sr-text-3);
+}
+.sr-msgrid-group-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-msgrid-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+}
+
+/* ===== 公式动态着色（FormulaCode 组件，.sr-formula-* 前缀类） ===== */
+.sr-formula-code {
+  font-family: ui-monospace, 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.sr-formula-op { color: var(--sr-accent); }
+.sr-formula-feat { color: #7c3aed; }
+body[data-theme='dark'] .sr-formula-feat { color: #a78bfa; }
+.sr-formula-num { color: #b45309; }
+body[data-theme='dark'] .sr-formula-num { color: #f0a93a; }
+
+/* ===== 指标分组菜单勾选：文字 ✓ 改为实心圆点（IndicatorStrip） ===== */
+.sr-ind-menu-box { position: relative; }
+.sr-ind-menu-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sr-accent);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform var(--sr-dur-fast) ease;
+}
+.sr-ind-menu-on .sr-ind-menu-dot {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* 键盘可达：focus 落在菜单项上时给出焦点环（与全局 :focus-visible 规则呼应） */
+.sr-ind-menu-item:focus-visible {
+  outline: 2px solid var(--sr-accent);
+  outline-offset: 1px;
+}
+
+/* ===== 无限滚动：开关 / 哨兵状态（InfiniteScrollToggle / InfiniteScrollSentinel） ===== */
+/* 模式开关（分页/无限滚动）：固定标签 + Switch，inline-flex 单行、不收缩、固定最小高度，
+   开关状态切换不引起几何变化（Switch 自身宽高固定） */
+.sr-infinite-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  white-space: nowrap;
+  min-height: var(--sr-ctl-h);
+  line-height: 1;
+}
+.sr-infinite-toggle-label {
+  flex: none;
+  font-size: 12px;
+  color: var(--sr-text-2);
+  white-space: nowrap;
+  user-select: none;
+}
+.sr-infinite-sentinel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 4px 0;
+  gap: 6px;
+}
+.sr-infinite-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-3);
+}
+.sr-infinite-done {
+  color: var(--sr-text-3);
+  font-size: var(--sr-font-xs);
+  letter-spacing: 0.3px;
+}
+.sr-infinite-error {
+  color: var(--sr-error);
+  gap: 8px;
+}
+.sr-infinite-more {
+  color: var(--sr-text-3) !important;
+  font-size: var(--sr-font-sm);
+}
+.sr-infinite-more:hover {
+  color: var(--sr-accent) !important;
+}

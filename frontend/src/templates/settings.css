@@ -1,0 +1,32 @@
+/* ============================================================
+   设置区块(SettingBlock 模板)局部样式——T-44 由 pages/settings/settings.css
+   收敛至 templates/ 组件目录(模板自带样式,删除设置页私有 css)。
+   全部颜色走 --sr-* 变量(亮/暗双主题自动适配)。
+   ============================================================ */
+
+/* 区块:扁平块(替代 Card,无卡套卡);SettingBlock 模板承载 */
+.sr-set-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-card);
+  width: 100%;
+  min-width: 0;
+}
+.sr-set-block {
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  padding: var(--sr-card-pad);
+}
+.sr-set-block-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  font-size: var(--sr-font-page);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  margin: 0 0 var(--sr-pad-lg);
+}
+.sr-set-block-title svg {
+  color: var(--sr-accent);
+}

@@ -1,0 +1,449 @@
+/* ============================================================
+   我的关注（WatchlistPage）局部样式
+   桌面：语义化 DataTable（标的/行情/走势/信号+模板/触发+共振/风险，整行可点）；
+   移动：三段 grid 卡片（每批 20，可无限滚动）
+   ============================================================ */
+
+/* 页面包裹层：fill 满高模式下占据剩余高度（segbar/工具条固定，表格区域 flex:1 内部滚动） */
+.sr-wl-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-page);
+  min-width: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 分段条（Toolbar 风格紧凑 chip：全部/有信号/静默，含计数与价值指标；替换原三张大卡压缩高度） */
+.sr-wl-segbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sr-wl-seg {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  font-size: var(--sr-font-sm);
+  line-height: 1.6;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-wl-seg:hover { border-color: var(--sr-accent); }
+.sr-wl-seg-active {
+  border-color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 12%, transparent);
+}
+.sr-wl-seg-label { color: var(--sr-text-2); }
+.sr-wl-seg-active .sr-wl-seg-label { color: var(--sr-text-1); font-weight: 600; }
+.sr-wl-seg-count { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--sr-text-1); }
+.sr-wl-seg-active .sr-wl-seg-count { color: var(--sr-accent); }
+.sr-wl-seg-metric { font-size: var(--sr-font-xs); color: var(--sr-text-3); }
+.sr-wl-metric-up { color: var(--sr-up); }
+.sr-wl-metric-down { color: var(--sr-down); }
+
+/* ---- 顶部工具条（无限滚动开关）----
+   由 Mantine Flex 承担 display/align/gap/wrap；此处仅保留吸顶与背景（fill 模式下自然失效） */
+.sr-wl-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  min-height: 30px;
+  background: var(--sr-bg);
+}
+@media (max-width: 768px) {
+  .sr-wl-toolbar { position: static; }
+}
+
+/* 桌面表格容器：fill 模式下占满剩余高度，DataTable virtual 在内部滚动（scroll.y 实测驱动） */
+.sr-wl-table-wrap {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* 整行可点（P1-54）：手型光标（Mantine DataTable 行 hover 背景由薄壳 SR_DT_CSS 保证，
+   此处仅补光标；2026-08-14 T-41 适配 .sr-dt-table 结构，原 antd 选择器已失效移除） */
+.sr-wl-page .sr-dt-table tbody tr {
+  cursor: pointer;
+}
+
+/* ---- 桌面表格列 ---- */
+/* 标的：名称+代码 一行，板块一行 */
+.sr-wl-stock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sr-wl-stock-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  /* 标的行内元素(星标 28 / 名称按钮 / 代码)垂直居中协调:行高由星标 28px 决定,
+     名称按钮 compact-sm(≈26px)与代码均以 align-items:center 居中,尺寸一致 */
+  line-height: 1;
+}
+.sr-wl-stock-name {
+  font-weight: 600;
+  padding: 0;
+  height: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.sr-wl-star {
+  flex-shrink: 0;
+  padding: 0;
+  height: auto;
+  line-height: 1;
+}
+.sr-wl-stock-code {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.sr-wl-stock-sector {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 行情：现价 + 涨跌幅 单行（窄列下 nowrap 可收缩，禁止溢出 td 画到相邻列：
+   价格恒显，涨跌幅截省略号兜底） */
+.sr-wl-quote-cell {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  justify-content: flex-end;
+  white-space: nowrap;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sr-wl-quote-cell > span:first-child {
+  flex-shrink: 0;
+}
+.sr-wl-quote-cell > span:last-child {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 信号：信号折叠展示（≤3 个 +N，Popover 展开全部） */
+.sr-wl-sigcell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+/* 信号标签行：单一语义定义（原 index.css 的 .sr-wl-sigs 重复定义已合并于此）——
+   flex-wrap:wrap 允许多行换行，min-width:0 保证 flex 子项可收缩，不设 overflow（换行不裁剪） */
+.sr-wl-sigs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+/* 折叠 +N 标签：虚线描边区分真实条目 */
+.sr-wl-fold {
+  margin: 0;
+  font-size: 10px;
+  line-height: 16px;
+  padding: 0 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--sr-text-2);
+  background: var(--sr-block-bg);
+  border: 1px dashed var(--sr-border);
+}
+/* Popover 展开全部的信号 */
+.sr-wl-sig-pop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: min(340px, 90vw);
+  /* T-134:信号多时浮层高度受限内部滚动,防超出视口(触发点贴底时不可达) */
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+/* 关注页残留类（自 index.css 迁入，纯搬迁不改变行为）：标的/行情/触发列占位「—」与年龄/新 Tag */
+.sr-wl-dash { color: var(--sr-text-3); font-size: 11px; }
+.sr-wl-tag {
+  margin: 0; margin-left: 6px; flex-shrink: 0;
+  font-size: 10px; line-height: 16px; padding: 0 4px; border-radius: 4px;
+}
+
+/* 触发列：信号触发时点状态机（resolveSignalMoment）——label 绝对时刻 + hint 相对上下文词（盘中高亮） */
+.sr-wl-time {
+  font-size: 11px;
+  color: var(--sr-text-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 走势迷你图：plots 固定 120×28（canvas 不随容器缩放）；容器同尺寸包裹 */
+.sr-spark-box {
+  width: 120px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+/* 无 K 线走势占位：与 sparkline 同尺寸，避免大空洞 */
+.sr-spark-ph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 28px;
+  border: 1px dashed var(--sr-border);
+  border-radius: 4px;
+  color: var(--sr-text-3);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* 触发：精确时点/年龄/新 */
+.sr-wl-trigcell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+.sr-wl-trigrow {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* 风险：两个 nowrap 键值对（原 @container 窄容器分支从未生效，已随死规则移除，恒为单行排布；
+   窄列下可收缩截省略号，禁止溢出 td 画到相邻列） */
+.sr-wl-risk-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sr-wl-risk-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sr-wl-risk-label {
+  color: var(--sr-text-3);
+  font-size: var(--sr-font-xs);
+}
+
+/* 斑马纹已收敛 DataTable 内建 sr-dt-zebra（同源 --sr-zebra-bg 令牌,P2-12 双实现清理） */
+
+/* ---- 移动端专用紧凑列表（三段 grid 卡片） ---- */
+.sr-wlm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.sr-wlm-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sr-wlm-card {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-wlm-card:active { background: var(--sr-hover-bg); }
+.sr-wlm-sec { min-width: 0; }
+
+/* 第一段：星标（最左）+ 标的 + 行情 */
+.sr-wlm-sec-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sr-wlm-sec-head .sr-wlm-card-title { flex: 1; }
+.sr-wlm-star {
+  flex-shrink: 0;
+  padding: 0;
+  height: auto;
+  line-height: 1;
+}
+.sr-wlm-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+.sr-wlm-name {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.sr-wlm-code {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+}
+.sr-wlm-tag {
+  margin: 0;
+  font-size: 10px;
+  line-height: 16px;
+  padding: 0 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-wlm-quote {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.sr-wlm-price {
+  font-weight: 700;
+  color: var(--sr-text-1);
+  font-variant-numeric: tabular-nums;
+}
+.sr-wlm-pct {
+  font-size: var(--sr-font-sm);
+}
+
+/* 第二段：走势（无 K 线显示占位，不留大空洞） */
+.sr-wlm-sec-trend {
+  display: flex;
+}
+
+/* 第三段：信号 + 模板（全部展示，自然换行） */
+.sr-wlm-sec-sig {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.sr-wlm-sig-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* 第四段：风险（两列键值）+ 触发 */
+.sr-wlm-sec-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.sr-wlm-risk {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 2px 10px;
+  justify-content: start;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  min-width: 0;
+}
+.sr-wlm-trig {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 6px;
+  justify-self: end;
+  max-width: 100%;
+}
+.sr-wlm-more {
+  margin: 4px 0 8px;
+}
+
+/* 页面级状态区（首载加载 / 错误 / 空态） */
+.sr-wl-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0;
+  min-height: 200px;
+}
+
+/* 行内错误横幅（T-131：信号接口失败降级提示，不占整页错误态） */
+.sr-wl-state-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--sr-error);
+  border-radius: var(--sr-radius-ctl);
+  background: color-mix(in srgb, var(--sr-error) 6%, var(--sr-card-bg));
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* ---- T-12 分组：筛选条 / 行菜单 / 管理 Modal ---- */
+.sr-wl-groupbar {
+  min-height: 30px;
+}
+.sr-wl-gmenu {
+  padding: 0;
+  height: auto;
+  line-height: 1;
+  color: var(--sr-text-2);
+}
+.sr-wl-gm-item {
+  padding: 4px 0;
+  list-style: none;
+}
+.sr-wl-gm-name {
+  font-weight: 600;
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}

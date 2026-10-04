@@ -1,0 +1,250 @@
+/* ============================================================
+   指标调优面板（TuneSection 组件专属，自 stock.css 迁入）：
+   参数编辑 / 结果分区块
+   ============================================================ */
+
+/* ===== 调优面板（无嵌套卡，参数编辑 / 结果分区块） ===== */
+.sr-tune-panel {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-card-radius);
+  background: var(--sr-card-bg);
+}
+.sr-tune-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.sr-tune-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.sr-tune-eff {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+.sr-tune-eff-label {
+  font-size: 11px;
+  color: var(--sr-text-3);
+  line-height: 18px;
+  flex-shrink: 0;
+}
+.sr-tune-tag {
+  font-size: 10px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 头部右侧：清除全部调优入口 */
+.sr-tune-head-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* 清除三档弹层：Radio 单选 + 动态文案（warning 提示影响所有股票）；
+   T-127:min/max 同源视口钳制,320px 视口下不再自相矛盾(min 280 > max 256) */
+.sr-tune-clear-body {
+  min-width: min(280px, calc(100vw - 64px));
+  max-width: calc(100vw - 64px);
+}
+.sr-tune-clear-desc {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* 结果区错误块（失败指标/组合：错误信息 + 重试） */
+.sr-tune-err {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+/* 第一行控制区：带明确标签的字段（优化模式/应用范围 Segmented + 指标/目标/预测周期/算法）+ 运行按钮；
+   flex-wrap 窄屏自动折行不溢出（Drawer 内） */
+.sr-tune-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+.sr-tune-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1 1 150px;
+}
+/* 指标字段（多选 + 可收缩）更宽优先 */
+.sr-tune-field-ind {
+  flex: 2 1 220px;
+}
+/* 模式/范围 Segmented 字段：内容自适应不强制拉伸，放不下整行换行 */
+.sr-tune-seg-field {
+  flex: 0 1 auto;
+}
+.sr-tune-label {
+  font-size: 11px;
+  color: var(--sr-text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sr-tune-run {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  min-width: 0;
+}
+.sr-tune-run .sr-tune-run-btn {
+  flex-shrink: 0;
+}
+/* 契约加载失败 Alert 区（目录 / 参数契约失败显性化） */
+.sr-tune-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+/* 调优进度（Progress 条 + 当前指标名文案） */
+.sr-tune-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  margin: -4px 0 8px;
+  min-width: 0;
+}
+/* 参数编辑区 */
+.sr-tune-editor {
+  min-width: 0;
+  border-top: 1px dashed var(--sr-border);
+  padding-top: 8px;
+  margin-bottom: 8px;
+}
+.sr-param-editor {
+  min-width: 0;
+}
+/* 每选中指标一个分区（individual 多选分组编辑），分区间虚线分隔 */
+.sr-param-block {
+  min-width: 0;
+  padding: 6px 0 8px;
+}
+.sr-param-block + .sr-param-block {
+  border-top: 1px dashed var(--sr-border);
+  padding-top: 10px;
+}
+.sr-param-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sr-text-1);
+  margin-bottom: 6px;
+}
+.sr-param-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 8px 10px;
+}
+.sr-param-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sr-param-label {
+  font-size: 11px;
+  color: var(--sr-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-param-default {
+  font-size: 10px;
+  color: var(--sr-text-3);
+}
+.sr-param-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+/* 结果区 */
+.sr-tune-results {
+  min-width: 0;
+  border-top: 1px dashed var(--sr-border);
+  padding-top: 8px;
+}
+.sr-tune-best {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.sr-tune-best-label {
+  font-size: 12px;
+  color: var(--sr-text-2);
+  flex-shrink: 0;
+}
+.sr-tune-best-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+}
+.sr-tune-target-note {
+  font-size: var(--sr-font-xs);
+  display: block;
+  margin-bottom: var(--sr-pad-sm);
+}
+/* 结果区 IC-参数折线图（individual 每指标 tab 内，表上方） */
+.sr-tune-chart {
+  min-width: 0;
+  margin-bottom: 8px;
+}
+.sr-tune-chart-title {
+  font-size: 11px;
+  color: var(--sr-text-3);
+  margin-bottom: 2px;
+}
+.sr-tune-chart-canvas {
+  width: 100%;
+  height: 150px;
+}
+/* 两模式结果并存标记（切换模式时「上次结果（逐个/整体）」） */
+.sr-tune-last {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+/* 整体调优最优组合行高亮 */
+.sr-tune-row-best > td {
+  background: var(--sr-hover-bg) !important;
+}
+.sr-tune-table-wrap {
+  max-height: 320px;
+  overflow: auto;
+  min-width: 0;
+}

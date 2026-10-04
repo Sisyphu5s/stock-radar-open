@@ -1,0 +1,272 @@
+/* ===== 任务中心局部样式（仅 Tasks 页使用；无渐变、无卡片嵌套，全部使用主题令牌） ===== */
+
+/* ---- 统计概览（Mantine Grid + MetricStat 卡）：栅格列内等高 ---- */
+.sr-task-stats .sr-stat-card {
+  height: 100%;
+}
+
+/* ---- 计算任务 / 待办事项 视图切换（常驻头部，两种视图共用同一位置，切换不跳动） ---- */
+.sr-task-viewsw {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 0 10px;
+}
+
+/* ---- 待办事项面板（移动可用：行内操作常显，不依赖 hover；窄屏标题换行） ---- */
+.sr-todo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.sr-todo-add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sr-todo-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sr-todo-count {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+.sr-todo-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 36px 0;
+}
+.sr-todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.sr-todo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  min-width: 0;
+}
+.sr-todo-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-todo-done .sr-todo-title {
+  color: var(--sr-text-3);
+  text-decoration: line-through;
+}
+.sr-todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+@media (max-width: 576px) {
+  .sr-todo-row {
+    flex-wrap: wrap;
+  }
+  .sr-todo-title {
+    white-space: normal;
+    word-break: break-all;
+  }
+}
+
+/* ---- 过滤工具吸顶：Select 弹性布局由 Toolbar(Flex wrap) 原生承担 */
+
+/* ---- 批量操作工具条（分页态桌面，选中后出现在表格上方）：按钮按状态智能启用 ---- */
+.sr-task-batchbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-md);
+  flex-wrap: wrap;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  margin-bottom: var(--sr-gap-row);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-block-bg);
+}
+
+/* ---- 移动端专用任务列表（<768；卡片宽 100% 自适应，间距全部走令牌） ---- */
+.sr-task-mlist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  min-width: 0;
+}
+/* T-52 满高页（分页 fill 态）：列表区占满剩余高度，卡片容器成为内部滚动承载；
+   flow 态（无限滚动）不加该修饰类，保持随内容自然增高 + 页面滚动 */
+.sr-task-mlist-fill {
+  flex: 1;
+  min-height: 0;
+}
+.sr-task-mlist-fill .sr-task-mcards {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.sr-task-mtool {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-pad-md);
+  padding: 2px 0;
+}
+.sr-task-mcards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+}
+.sr-task-mcard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  width: 100%;
+  padding: var(--sr-pad-lg) var(--sr-pad-xl);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sr-task-mcard:active { background: var(--sr-hover-bg); }
+.sr-task-mcard-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-sm);
+  min-width: 0;
+}
+.sr-task-mcard-type {
+  font-size: var(--sr-font-sm);
+  font-weight: 600;
+  color: var(--sr-text-1);
+  flex-shrink: 0;
+}
+.sr-task-mcard-id {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  flex-shrink: 0;
+}
+.sr-task-mcard-expr {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-task-mcard-summary {
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-task-mcard-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sr-pad-md);
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+  min-width: 0;
+}
+.sr-task-mcard-meta span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-task-mcard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sr-pad-xs);
+  padding-top: 2px;
+  border-top: 1px dashed var(--sr-border);
+}
+.sr-task-mempty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0;
+}
+.sr-task-mpage {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+/* ---- 无限滚动（桌面）：已加载 / 总数提示 ---- */
+.sr-task-inf-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-3);
+}
+
+/* ---- 分页模式新任务徽标：列表上方居中，点击回第一页 ---- */
+.sr-task-new-badge {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0 2px;
+}
+
+/* ---- 详情抽屉 ---- */
+.sr-task-drawer-status {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-pad-md);
+}
+.sr-task-drawer-block {
+  font-size: var(--sr-font-sm);
+  padding: var(--sr-pad-md);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-block-bg);
+  border: 1px solid var(--sr-border);
+  margin-top: var(--sr-pad-xs);
+  word-break: break-all;
+}
+.sr-task-drawer-pre {
+  font-size: var(--sr-font-xs);
+  padding: var(--sr-pad-md);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-block-bg);
+  border: 1px solid var(--sr-border);
+  margin-top: var(--sr-pad-xs);
+  margin-bottom: 0;
+  max-height: clamp(160px, 38vh, 320px);
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--sr-text-1);
+}
+.sr-task-drawer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sr-pad-md);
+  flex-wrap: wrap;
+  padding-top: var(--sr-pad-xs);
+}

@@ -1,0 +1,23 @@
+/* ===== 因子挖掘（discovery）工作流局部样式 =====
+   平面区块 + 上下文条胶囊；仅作用于本目录组件，不触碰全局样式。 */
+
+/* 搜索空间区块：特征 / 算子分组之间的细分隔 */
+.sr-disc-section + .sr-disc-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--sr-border);
+}
+
+/* 桌面端配置列：自身滚动容器内 sticky，配置与运行按钮保持可见。
+   过渡记账(T-42 列表填满修复):此处沿用 --sr-page-fill-h 令牌(已随 safe-top 修正,
+   与页面满高语义一致);sticky 列的精确容器实测(maxHeight 由父容器高度换算)留待后续
+   discovery 布局重构时统一处理——当前超算/少算几像素对 sticky 滚动体验无可见影响。 */
+@media (min-width: 992px) {
+  .sr-disc-config-col {
+    position: sticky;
+    top: 0;
+    max-height: var(--sr-page-fill-h);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "_note": "图审计白名单:存量违例豁免,只删不增(新增违例=差集非空=FAIL)。分组对应 rules/R*.mjs。条目语法:`file:line`(点位精确,行号漂移敏感)或 `file::锚点`(语义锚点,漂移免疫——R2=field,R4=component::prop);新增豁免优先用语义锚点。",
+  "_debt": {
+    "r2_time": "WatchResults::updated_at 单独锚点:同面板其余时刻为上海 naive 串,P2-63 后本地时戳收敛口径,此条仍豁免(该字段由 SSE 轮询写入,见 debt 记账)",
+    "r4_memo": "存量 memo 组件内联 props(27 处,非 T-106 修复范围;T-106 已清 ScreenerPage/SignalStreamPanel/WatchlistTable/desktopTable 8 处)",
+    "r8_routes": "/compare 引导态页与 /market/workbench 深层页,设计性无菜单入口"
+  },
+  "r1_fields": [],
+  "r2_time": [
+    "pages/market/paper/WatchResults.tsx::updated_at"
+  ],
+  "r3_effects": [],
+  "r4_memo": [
+    "pages/market/WatchlistPage.tsx::InfiniteScrollSentinel::loadMore",
+    "pages/market/paper/ExperimentResults.tsx::DataTable::pagination",
+    "pages/market/workbench/sections/capital.tsx::DataTable::pagination",
+    "pages/market/workbench/sections/capital.tsx::DataTable::rowKey",
+    "pages/market/workbench/sections/financial.tsx::DataTable::pagination",
+    "pages/market/workbench/sections/financial.tsx::DataTable::rowKey",
+    "pages/market/workbench/sections/tune/ResultsPanel.tsx::DataTable::columns",
+    "pages/market/workbench/sections/tune/ResultsPanel.tsx::DataTable::onRow",
+    "pages/market/workbench/sections/tune/ResultsPanel.tsx::DataTable::pagination",
+    "pages/market/workbench/sections/tune/ResultsPanel.tsx::DataTable::rowClassName",
+    "pages/market/workbench/sections/tune/ResultsPanel.tsx::DataTable::rowKey",
+    "pages/research/Alpha101.tsx::DataTable::onRow",
+    "pages/research/FactorLibrary.tsx::DataTable::onRow",
+    "pages/research/combine/Combine.tsx::DataTable::columns",
+    "pages/research/discovery/ResultDetailDrawer.tsx::DataTable::pagination",
+    "pages/research/discovery/ResultDetailDrawer.tsx::DataTable::rowKey",
+    "pages/research/discovery/ResultsPanel.tsx::DataTable::onRow",
+    "pages/research/discovery/ResultsPanel.tsx::DataTable::pagination",
+    "pages/research/discovery/ResultsPanel.tsx::DataTable::rowKey",
+    "pages/research/evaluation/EvaluationResults.tsx::DataTable::columns",
+    "pages/research/evaluation/TuneModal.tsx::DataTable::onRow",
+    "pages/research/runs/RunDetail.tsx::DataTable::rowKey",
+    "pages/research/tasks/summary.tsx::DataTable::columns",
+    "pages/research/tasks/summary.tsx::DataTable::pagination",
+    "pages/research/tasks/summary.tsx::DataTable::rowKey"
+  ],
+  "r5_impure": [],
+  "r6_poll": [],
+  "r7_orphans": [],
+  "r8_routes": [
+    "App.tsx:43",
+    "App.tsx:59"
+  ]
+}

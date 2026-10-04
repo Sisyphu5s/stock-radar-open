@@ -1,0 +1,25 @@
+/* ===== UI 打磨：DataTable 横滚提示（在 index.css 之后加载，可覆盖） ===== */
+
+/* 可横向滚动表格：外层定位容器 + 右上角 ↔ 提示（可见滚动提示，无装饰渐变） */
+.sr-table-scroll {
+  position: relative;
+}
+.sr-scroll-x-hint-text {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  z-index: 2;
+  font-size: 10px;
+  line-height: 16px;
+  color: var(--sr-text-3);
+  background: var(--sr-card-bg);
+  border: 1px solid var(--sr-border);
+  border-radius: 4px;
+  padding: 0 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--sr-dur-norm) ease;
+}
+.sr-table-scroll:hover .sr-scroll-x-hint-text {
+  opacity: 1;
+}

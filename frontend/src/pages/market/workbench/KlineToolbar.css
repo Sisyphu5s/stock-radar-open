@@ -1,0 +1,200 @@
+/* ============================================================
+   K 线工具条（KlineToolbar 组件专属，自 stock.css 迁入）：
+   周期 Segmented + 指标菜单 + 调优入口 + 生效参数内联。
+   ============================================================ */
+
+/* ===== 稳定工具条（flex-wrap 自动换行：周期 + 指标菜单 + 调优按钮 + 生效参数，窄屏折行不横滚） ===== */
+.sr-stk-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 0;
+  padding: 4px 0 8px;
+}
+.sr-stk-toolbar > * { flex-shrink: 0; }
+/* 周期 Segmented：--sr-ctl-h 统一控件高度（与按钮对齐；SegmentedControl 自身 xs 高度垂直居中） */
+.sr-stk-period {
+  display: inline-flex;
+  align-items: center;
+}
+/* 调优/重置布局/全屏按钮：参与工具条收缩（flex-shrink 1 + min-width 0），窄容器下按钮可压缩；
+   周期/指标菜单保持不收缩，放不下时整体换行 */
+.sr-stk-toolbar > .sr-stk-tune,
+.sr-stk-toolbar > .sr-stk-reset,
+.sr-stk-toolbar > .sr-stk-fs {
+  flex-shrink: 1;
+  min-width: 0;
+  display: inline-flex;
+}
+.sr-stk-toolbar > .sr-stk-tune .sr-stk-tune-btn,
+.sr-stk-toolbar > .sr-stk-reset .sr-stk-reset-btn,
+.sr-stk-toolbar > .sr-stk-fs .sr-stk-fs-btn {
+  min-width: 0;
+  max-width: 100%;
+}
+/* 调优入口高亮（面板打开时） */
+.sr-stk-tune-open .sr-stk-tune-btn {
+  color: var(--sr-accent);
+  border-color: var(--sr-accent);
+}
+/* T-117 全屏入口高亮（全屏进行中） */
+.sr-stk-fs-open .sr-stk-fs-btn {
+  color: var(--sr-accent);
+  border-color: var(--sr-accent);
+}
+
+/* ===== T-14/T-68 画线工具（操作类尾组：单个「画线」按钮 + Popover 菜单）
+   菜单化后组为一个按钮，不再需要收缩裁字（flex-shrink 走工具栏默认 0）；激活态高亮同调优入口。 */
+.sr-stk-draw {
+  display: inline-flex;
+  align-items: center;
+}
+.sr-stk-draw .sr-stk-draw-active {
+  /* 文字色走 onAccent(实底上的前景),禁 accent 同色字(T-80:蓝底蓝字不可见) */
+  color: var(--sr-on-accent) !important;
+  border-color: var(--sr-accent) !important;
+}
+
+/* ===== 画线菜单（Popover 内：4 工具 + 清除全部 + 计数；激活项 accent 高亮，模式同 IndicatorStrip） ===== */
+.sr-stk-draw-menu {
+  width: 168px;
+  padding: 2px;
+}
+.sr-stk-draw-menu-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sr-text-1);
+  padding: 4px 6px 8px;
+}
+.sr-stk-draw-menu-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sr-text-3);
+}
+.sr-stk-draw-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 5px 6px;
+  border-radius: var(--sr-radius-ctl);
+  border: 1px solid transparent;
+  color: var(--sr-text-2);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.sr-stk-draw-menu-item:hover {
+  background: var(--sr-block-bg);
+  color: var(--sr-text-1);
+}
+.sr-stk-draw-menu-on {
+  border-color: var(--sr-accent);
+  color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 12%, transparent);
+}
+.sr-stk-draw-menu-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.sr-stk-draw-menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  flex-shrink: 0;
+  color: inherit;
+}
+.sr-stk-draw-menu-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sr-stk-draw-menu-sep {
+  height: 1px;
+  margin: 4px 2px;
+  background: var(--sr-border);
+}
+
+/* ===== 移动端紧凑工具条(T-80):「工具」Popover 收纳主图/副图/调优/画线/重置/参数,
+   周期条独占一行,整体 ≤2 行,不再 4 行折行压垮图表容器 ===== */
+.sr-stk-mobile-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(320px, calc(100vw - 48px));
+  padding: 2px;
+}
+.sr-stk-mobile-tools-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sr-stk-mobile-tools-title {
+  font-size: var(--sr-font-xs);
+  font-weight: 600;
+  color: var(--sr-text-3);
+  margin-bottom: 2px;
+}
+.sr-stk-mobile-draw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 6px;
+}
+.sr-stk-mobile-draw-item {
+  padding: 6px 4px;
+  font-size: var(--sr-font-sm);
+  border-radius: var(--sr-radius-ctl);
+  border: 1px solid var(--sr-border);
+  background: var(--sr-block-bg);
+  color: var(--sr-text-2);
+  cursor: pointer;
+}
+.sr-stk-mobile-draw-on {
+  border-color: var(--sr-accent);
+  color: var(--sr-accent);
+  background: color-mix(in srgb, var(--sr-accent) 12%, transparent);
+}
+.sr-stk-mobile-tuned {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ===== 生效参数（恒内联展示：每个已调优指标一个 Tag；超 MAX_INLINE_TAGS 折叠为「+N」Tag tooltip 展开全部，
+   单行内联不折行，不再把工具栏撑成 2-3 行） =====
+   标签过长时组内省略，不撑破布局。 */
+.sr-tune-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sr-tune-inline .sr-tune-inline-tag {
+  font-size: var(--sr-font-meta);
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 「+N」折叠 Tag（cursor 提示可悬浮展开全部） */
+.sr-tune-inline-more {
+  cursor: pointer;
+}
+.sr-tune-inline-more-tip {
+  font-size: 12px;
+  line-height: 1.8;
+}
+/* 工具条内联「清除本图表调优」小按钮（danger 文本样式，随生效参数尾部排列） */
+.sr-tune-inline-clear {
+  flex-shrink: 0;
+}

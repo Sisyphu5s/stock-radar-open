@@ -1,0 +1,5854 @@
+{
+  "/market/snapshot": {
+    "GET": {
+      "fields": {
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        },
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/indices": {
+    "GET": {
+      "fields": {
+        "indices": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "indices[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "indices[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "indices[].market": {
+          "type": "string",
+          "nullable": false
+        },
+        "market": {
+          "type": "string",
+          "nullable": false
+        },
+        "indices[].price": {
+          "type": "number",
+          "nullable": true
+        },
+        "price": {
+          "type": "number",
+          "nullable": true
+        },
+        "indices[].pct_change": {
+          "type": "number",
+          "nullable": true
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": true
+        },
+        "indices[].currency": {
+          "type": "string",
+          "nullable": false
+        },
+        "currency": {
+          "type": "string",
+          "nullable": false
+        },
+        "indices[].updated_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/market/sources/status": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.override": {
+          "type": "string",
+          "nullable": false
+        },
+        "override": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.active": {
+          "type": "string",
+          "nullable": true
+        },
+        "active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "data.last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data.sources[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.sources[].spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "sources": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/sources/switch": {
+    "POST": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.override": {
+          "type": "string",
+          "nullable": false
+        },
+        "override": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.active": {
+          "type": "string",
+          "nullable": true
+        },
+        "active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "data.last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data.sources[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.sources[].spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "sources": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/sources/probe": {
+    "POST": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "mode": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.override": {
+          "type": "string",
+          "nullable": false
+        },
+        "override": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.active": {
+          "type": "string",
+          "nullable": true
+        },
+        "active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "preference": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "data.last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_switch_ts": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_switch_reason": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data.sources[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sources[].ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].active": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "latency_ms": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "spot_fails": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.sources[].spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "spot_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "blocked_until": {
+          "type": "number",
+          "nullable": true
+        },
+        "data.sources[].degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "degraded": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "kline_blocked": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data.sources[].last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_ok": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_fail": {
+          "type": "string",
+          "nullable": true
+        },
+        "data.sources[].last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "last_error": {
+          "type": "string",
+          "nullable": false
+        },
+        "sources": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/notifications": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].signals": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "signals": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].period": {
+          "type": "string",
+          "nullable": true
+        },
+        "period": {
+          "type": "string",
+          "nullable": true
+        },
+        "latest_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "bootstrap": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/groups": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].count": {
+          "type": "number",
+          "nullable": false
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].codes": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "codes": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.count": {
+          "type": "number",
+          "nullable": false
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.codes": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "codes": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/groups/:p": {
+    "PATCH": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "sort_order": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.count": {
+          "type": "number",
+          "nullable": false
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.codes": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "codes": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    },
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/groups/:p/items": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].last_price": {
+          "type": "number",
+          "nullable": false
+        },
+        "last_price": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].industry": {
+          "type": "string",
+          "nullable": false
+        },
+        "industry": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].updated_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "added": {
+          "type": "number",
+          "nullable": false
+        },
+        "codes": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/groups/:p/items/:p": {
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/import": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "added": {
+          "type": "number",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        },
+        "invalid": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist/:p": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    },
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/market/watchlist": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].last_price": {
+          "type": "number",
+          "nullable": false
+        },
+        "last_price": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].industry": {
+          "type": "string",
+          "nullable": false
+        },
+        "industry": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].updated_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/screener/run": {
+    "POST": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].price": {
+          "type": "number",
+          "nullable": true
+        },
+        "price": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].pct_change": {
+          "type": "number",
+          "nullable": true
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].turnover_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].volume_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "volume_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].pe": {
+          "type": "number",
+          "nullable": true
+        },
+        "pe": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].pb": {
+          "type": "number",
+          "nullable": true
+        },
+        "pb": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].market_cap": {
+          "type": "number",
+          "nullable": true
+        },
+        "market_cap": {
+          "type": "number",
+          "nullable": true
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "as_of": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/indicators/catalog": {
+    "GET": {
+      "fields": {
+        "main_overlays": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "main_overlays[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "main_overlays[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "sub_indicators": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "sub_indicators[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "sub_indicators[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "tuneable": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "specs": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].params[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].label": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].type": {
+          "type": "string",
+          "nullable": false
+        },
+        "type": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].default": {
+          "type": "number",
+          "nullable": false
+        },
+        "default": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].min": {
+          "type": "number",
+          "nullable": false
+        },
+        "min": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].max": {
+          "type": "number",
+          "nullable": false
+        },
+        "max": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].step": {
+          "type": "number",
+          "nullable": false
+        },
+        "step": {
+          "type": "number",
+          "nullable": false
+        },
+        "params": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].defaults": {
+          "type": "object",
+          "nullable": false
+        },
+        "defaults": {
+          "type": "object",
+          "nullable": false
+        },
+        "specs[].candidates": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "candidates": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "targets": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/params": {
+    "GET": {
+      "fields": {
+        "specs": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].params[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].label": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].type": {
+          "type": "string",
+          "nullable": false
+        },
+        "type": {
+          "type": "string",
+          "nullable": false
+        },
+        "specs[].params[].default": {
+          "type": "number",
+          "nullable": false
+        },
+        "default": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].min": {
+          "type": "number",
+          "nullable": false
+        },
+        "min": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].max": {
+          "type": "number",
+          "nullable": false
+        },
+        "max": {
+          "type": "number",
+          "nullable": false
+        },
+        "specs[].params[].step": {
+          "type": "number",
+          "nullable": false
+        },
+        "step": {
+          "type": "number",
+          "nullable": false
+        },
+        "params": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "specs[].defaults": {
+          "type": "object",
+          "nullable": false
+        },
+        "defaults": {
+          "type": "object",
+          "nullable": false
+        },
+        "specs[].candidates": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "candidates": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "targets": {
+          "type": "object",
+          "nullable": false
+        },
+        "global": {
+          "type": "object",
+          "nullable": true
+        },
+        "legacy": {
+          "type": "object",
+          "nullable": false
+        },
+        "effective": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/params/:p": {
+    "PUT": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "indicator": {
+          "type": "string",
+          "nullable": false
+        },
+        "params": {
+          "type": "object",
+          "nullable": false
+        },
+        "stored": {
+          "type": "object",
+          "nullable": false
+        },
+        "stored.values": {
+          "type": "object",
+          "nullable": false
+        },
+        "values": {
+          "type": "object",
+          "nullable": false
+        },
+        "stored.source": {
+          "type": "string",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "stored.target": {
+          "type": "string",
+          "nullable": false
+        },
+        "target": {
+          "type": "string",
+          "nullable": false
+        },
+        "stored.horizon": {
+          "type": "number",
+          "nullable": false
+        },
+        "horizon": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    },
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "indicator": {
+          "type": "string",
+          "nullable": false
+        },
+        "deleted": {
+          "type": "number",
+          "nullable": false
+        },
+        "defaults": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/tune-history": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].indicator": {
+          "type": "string",
+          "nullable": false
+        },
+        "indicator": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].target": {
+          "type": "string",
+          "nullable": false
+        },
+        "target": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].horizon": {
+          "type": "number",
+          "nullable": false
+        },
+        "horizon": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].best_param": {
+          "type": "string",
+          "nullable": false
+        },
+        "best_param": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].best_ic": {
+          "type": "number",
+          "nullable": false
+        },
+        "best_ic": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].results": {
+          "type": "object",
+          "nullable": false
+        },
+        "results": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/indicators/tune/global": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "effective": {
+          "type": "object",
+          "nullable": false
+        },
+        "v2": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    },
+    "PUT": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "saved": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/:p": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "dates": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "indicators": {
+          "type": "object",
+          "nullable": false
+        },
+        "latest": {
+          "type": "object",
+          "nullable": false
+        },
+        "effective_params": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/indicators/:p/risk": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "periods": {
+          "type": "number",
+          "nullable": true
+        },
+        "window": {
+          "type": "number",
+          "nullable": true
+        },
+        "ret_series": {
+          "type": "array(number)",
+          "nullable": true
+        },
+        "annual_return": {
+          "type": "number",
+          "nullable": true
+        },
+        "annual_volatility": {
+          "type": "number",
+          "nullable": true
+        },
+        "ewma_volatility": {
+          "type": "number",
+          "nullable": true
+        },
+        "sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "sortino": {
+          "type": "number",
+          "nullable": true
+        },
+        "calmar": {
+          "type": "number",
+          "nullable": true
+        },
+        "ulcer_index": {
+          "type": "number",
+          "nullable": true
+        },
+        "downside_deviation": {
+          "type": "number",
+          "nullable": true
+        },
+        "max_drawdown": {
+          "type": "number",
+          "nullable": true
+        },
+        "drawdown_recovery_days": {
+          "type": "number",
+          "nullable": true
+        },
+        "avg_drawdown": {
+          "type": "number",
+          "nullable": true
+        },
+        "skewness": {
+          "type": "number",
+          "nullable": true
+        },
+        "kurtosis": {
+          "type": "number",
+          "nullable": true
+        },
+        "win_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "max_loss_streak": {
+          "type": "number",
+          "nullable": true
+        },
+        "var95_param": {
+          "type": "number",
+          "nullable": true
+        },
+        "var99_param": {
+          "type": "number",
+          "nullable": true
+        },
+        "var95_cf": {
+          "type": "number",
+          "nullable": true
+        },
+        "var99_cf": {
+          "type": "number",
+          "nullable": true
+        },
+        "tail_risk": {
+          "type": "number",
+          "nullable": true
+        },
+        "var_pct_budget": {
+          "type": "number",
+          "nullable": true
+        },
+        "beta": {
+          "type": "number",
+          "nullable": true
+        },
+        "alpha": {
+          "type": "number",
+          "nullable": true
+        },
+        "var95": {
+          "type": "number",
+          "nullable": true
+        },
+        "var99": {
+          "type": "number",
+          "nullable": true
+        },
+        "cvar95": {
+          "type": "number",
+          "nullable": true
+        },
+        "cvar99": {
+          "type": "number",
+          "nullable": true
+        },
+        "explanations": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/:p/tune": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/:p/tune/combined": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/indicators/:p/latest": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "latest": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/operators": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].arity": {
+          "type": "number",
+          "nullable": false
+        },
+        "arity": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].display": {
+          "type": "string",
+          "nullable": false
+        },
+        "display": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].category": {
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "nullable": false
+        },
+        "default_set": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "features": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "param_grid": {
+          "type": "object",
+          "nullable": false
+        },
+        "editable_ops": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/explain": {
+    "GET": {
+      "fields": {
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "steps": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "steps[].step": {
+          "type": "number",
+          "nullable": false
+        },
+        "step": {
+          "type": "number",
+          "nullable": false
+        },
+        "steps[].op": {
+          "type": "string",
+          "nullable": false
+        },
+        "op": {
+          "type": "string",
+          "nullable": false
+        },
+        "steps[].display": {
+          "type": "string",
+          "nullable": false
+        },
+        "display": {
+          "type": "string",
+          "nullable": false
+        },
+        "steps[].inputs": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "inputs": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "steps[].note": {
+          "type": "string",
+          "nullable": false
+        },
+        "note": {
+          "type": "string",
+          "nullable": false
+        },
+        "steps[].params": {
+          "type": "object",
+          "nullable": true
+        },
+        "params": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/alpha/alpha101": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].category": {
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data[].latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "categories": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/alpha101/:p": {
+    "GET": {
+      "fields": {
+        "alpha": {
+          "type": "object",
+          "nullable": false
+        },
+        "alpha.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "alpha.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.category": {
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "alpha.latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "alpha.skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "same_category": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "same_category[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "same_category[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].category": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "same_category[].evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "same_category[].latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "same_category[].skip_reason": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/alpha/alpha101/:p/to-library": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "duplicate": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "factor": {
+          "type": "object",
+          "nullable": true
+        },
+        "version": {
+          "type": "object",
+          "nullable": true
+        },
+        "message": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/alpha/alpha101/evaluate": {
+    "POST": {
+      "fields": {
+        "alpha": {
+          "type": "object",
+          "nullable": false
+        },
+        "alpha.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "alpha.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.category": {
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "formula_expr": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "params_desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "usage": {
+          "type": "string",
+          "nullable": false
+        },
+        "alpha.evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "evaluable": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "alpha.latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": true
+        },
+        "alpha.skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "skip_reason": {
+          "type": "string",
+          "nullable": true
+        },
+        "train": {
+          "type": "object",
+          "nullable": false
+        },
+        "train.expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "train.complexity": {
+          "type": "number",
+          "nullable": false
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": false
+        },
+        "train.ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.top_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "top_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.long_short_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "long_short_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "train.ic_positive_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "ic_positive_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos": {
+          "type": "object",
+          "nullable": false
+        },
+        "oos.expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "oos.complexity": {
+          "type": "number",
+          "nullable": false
+        },
+        "oos.ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.top_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.long_short_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos.ic_positive_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "meta": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/alpha101/score": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/tune": {
+    "POST": {
+      "fields": {
+        "expression": {
+          "type": "string",
+          "nullable": true
+        },
+        "probe": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "job_id": {
+          "type": "number",
+          "nullable": true
+        },
+        "status": {
+          "type": "string",
+          "nullable": true
+        },
+        "available_params": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "param_meta": {
+          "type": "array(object)",
+          "nullable": true
+        },
+        "param_meta[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "param_meta[].op": {
+          "type": "string",
+          "nullable": false
+        },
+        "op": {
+          "type": "string",
+          "nullable": false
+        },
+        "param_meta[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "param_meta[].index": {
+          "type": "number",
+          "nullable": false
+        },
+        "index": {
+          "type": "number",
+          "nullable": false
+        },
+        "param_meta[].default": {
+          "type": "number",
+          "nullable": true
+        },
+        "default": {
+          "type": "number",
+          "nullable": true
+        },
+        "param_meta[].is_int": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "is_int": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "param_meta[].count": {
+          "type": "number",
+          "nullable": false
+        },
+        "count": {
+          "type": "number",
+          "nullable": false
+        },
+        "target": {
+          "type": "string",
+          "nullable": true
+        },
+        "horizon": {
+          "type": "number",
+          "nullable": true
+        },
+        "param": {
+          "type": "object",
+          "nullable": true
+        },
+        "param.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "param.min": {
+          "type": "number",
+          "nullable": false
+        },
+        "min": {
+          "type": "number",
+          "nullable": false
+        },
+        "param.max": {
+          "type": "number",
+          "nullable": false
+        },
+        "max": {
+          "type": "number",
+          "nullable": false
+        },
+        "param.step": {
+          "type": "number",
+          "nullable": false
+        },
+        "step": {
+          "type": "number",
+          "nullable": false
+        },
+        "param.is_int": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "grid": {
+          "type": "array(object)",
+          "nullable": true
+        },
+        "grid[].param_value": {
+          "type": "number",
+          "nullable": false
+        },
+        "param_value": {
+          "type": "number",
+          "nullable": false
+        },
+        "grid[].train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].icir": {
+          "type": "number",
+          "nullable": true
+        },
+        "icir": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].ls_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "ls_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].ls_sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "ls_sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].max_drawdown": {
+          "type": "number",
+          "nullable": true
+        },
+        "max_drawdown": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].win_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "win_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "grid[].error": {
+          "type": "string",
+          "nullable": true
+        },
+        "error": {
+          "type": "string",
+          "nullable": true
+        },
+        "best": {
+          "type": "object",
+          "nullable": true
+        },
+        "best.param_value": {
+          "type": "number",
+          "nullable": false
+        },
+        "best.train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.icir": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.ls_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.ls_sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.max_drawdown": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.win_rate": {
+          "type": "number",
+          "nullable": true
+        },
+        "best.error": {
+          "type": "string",
+          "nullable": true
+        },
+        "best_expression": {
+          "type": "string",
+          "nullable": true
+        },
+        "meta": {
+          "type": "object",
+          "nullable": true
+        },
+        "meta.stocks": {
+          "type": "number",
+          "nullable": true
+        },
+        "stocks": {
+          "type": "number",
+          "nullable": true
+        },
+        "meta.days": {
+          "type": "number",
+          "nullable": true
+        },
+        "days": {
+          "type": "number",
+          "nullable": true
+        },
+        "meta.split": {
+          "type": "object",
+          "nullable": true
+        },
+        "split": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/alpha/tune/global": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    },
+    "PUT": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "saved": {
+          "type": "array(string)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/backend": {
+    "GET": {
+      "fields": {
+        "backend": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/latex": {
+    "GET": {
+      "fields": {
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/nn-models": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].checkpoint": {
+          "type": "string",
+          "nullable": false
+        },
+        "checkpoint": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].architecture": {
+          "type": "object",
+          "nullable": false
+        },
+        "architecture": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].horizon": {
+          "type": "number",
+          "nullable": false
+        },
+        "horizon": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].epochs": {
+          "type": "number",
+          "nullable": false
+        },
+        "epochs": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].train_loss": {
+          "type": "array(number)",
+          "nullable": true
+        },
+        "train_loss": {
+          "type": "array(number)",
+          "nullable": true
+        },
+        "data[].val_loss": {
+          "type": "array(number)",
+          "nullable": true
+        },
+        "val_loss": {
+          "type": "array(number)",
+          "nullable": true
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/alpha/publish-steps": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "desc": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/optimize": {
+    "POST": {
+      "fields": {
+        "method": {
+          "type": "string",
+          "nullable": false
+        },
+        "max_weight": {
+          "type": "number",
+          "nullable": false
+        },
+        "top_n": {
+          "type": "number",
+          "nullable": false
+        },
+        "weights": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "weights[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "weights[].weight": {
+          "type": "number",
+          "nullable": false
+        },
+        "weight": {
+          "type": "number",
+          "nullable": false
+        },
+        "perf": {
+          "type": "object",
+          "nullable": false
+        },
+        "perf.annual_return": {
+          "type": "number",
+          "nullable": true
+        },
+        "annual_return": {
+          "type": "number",
+          "nullable": true
+        },
+        "perf.volatility": {
+          "type": "number",
+          "nullable": true
+        },
+        "volatility": {
+          "type": "number",
+          "nullable": true
+        },
+        "perf.sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "sharpe": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/alpha/combine": {
+    "POST": {
+      "fields": {
+        "method": {
+          "type": "string",
+          "nullable": false
+        },
+        "ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "ic_series": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "ic_positive_ratio": {
+          "type": "number",
+          "nullable": true
+        },
+        "weights": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "weights[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "weights[].weight": {
+          "type": "number",
+          "nullable": false
+        },
+        "weight": {
+          "type": "number",
+          "nullable": false
+        },
+        "combined_signal": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "combined_signal[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "combined_signal[].value": {
+          "type": "number",
+          "nullable": false
+        },
+        "value": {
+          "type": "number",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor": {
+          "type": "object",
+          "nullable": true
+        },
+        "factor.id": {
+          "type": "number",
+          "nullable": true
+        },
+        "id": {
+          "type": "number",
+          "nullable": true
+        },
+        "factor.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.duplicate": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "duplicate": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "factor.message": {
+          "type": "string",
+          "nullable": true
+        },
+        "message": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/datasets/universes": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/datasets/warmup/status": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        },
+        "data.status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "data.message": {
+          "type": "string",
+          "nullable": false
+        },
+        "message": {
+          "type": "string",
+          "nullable": false
+        },
+        "data.dataset_id": {
+          "type": "number",
+          "nullable": true
+        },
+        "dataset_id": {
+          "type": "number",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/datasets": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].universe": {
+          "type": "string",
+          "nullable": false
+        },
+        "universe": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].start_date": {
+          "type": "string",
+          "nullable": false
+        },
+        "start_date": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].end_date": {
+          "type": "string",
+          "nullable": false
+        },
+        "end_date": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].stock_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "stock_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].row_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "row_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/datasets/:p": {
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/experiments": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    },
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].job_type": {
+          "type": "string",
+          "nullable": false
+        },
+        "job_type": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].label": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].phase": {
+          "type": "string",
+          "nullable": false
+        },
+        "phase": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].expr": {
+          "type": "object",
+          "nullable": false
+        },
+        "expr": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].dataset_id": {
+          "type": "object",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].summary": {
+          "type": "object",
+          "nullable": true
+        },
+        "summary": {
+          "type": "object",
+          "nullable": true
+        },
+        "data[].error": {
+          "type": "string",
+          "nullable": false
+        },
+        "error": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].params": {
+          "type": "object",
+          "nullable": false
+        },
+        "params": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/experiments/page": {
+    "GET": {
+      "fields": {
+        "items": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "items[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "items[].job_type": {
+          "type": "string",
+          "nullable": false
+        },
+        "job_type": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].label": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "items[].phase": {
+          "type": "string",
+          "nullable": false
+        },
+        "phase": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].expr": {
+          "type": "object",
+          "nullable": false
+        },
+        "expr": {
+          "type": "object",
+          "nullable": false
+        },
+        "items[].dataset_id": {
+          "type": "object",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "object",
+          "nullable": false
+        },
+        "items[].summary": {
+          "type": "object",
+          "nullable": true
+        },
+        "summary": {
+          "type": "object",
+          "nullable": true
+        },
+        "items[].error": {
+          "type": "string",
+          "nullable": false
+        },
+        "error": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "items[].params": {
+          "type": "object",
+          "nullable": false
+        },
+        "params": {
+          "type": "object",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        },
+        "limit": {
+          "type": "number",
+          "nullable": false
+        },
+        "offset": {
+          "type": "number",
+          "nullable": false
+        },
+        "has_more": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": true
+        },
+        "stats": {
+          "type": "object",
+          "nullable": true
+        },
+        "stats.today_new": {
+          "type": "number",
+          "nullable": false
+        },
+        "today_new": {
+          "type": "number",
+          "nullable": false
+        },
+        "stats.stock_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "stock_count": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/experiments/:p": {
+    "GET": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "job_type": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "progress": {
+          "type": "number",
+          "nullable": false
+        },
+        "phase": {
+          "type": "string",
+          "nullable": false
+        },
+        "params": {
+          "type": "object",
+          "nullable": false
+        },
+        "result": {
+          "type": "object",
+          "nullable": false
+        },
+        "error": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "finished_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "results": {
+          "type": "array(object)",
+          "nullable": true
+        },
+        "meta": {
+          "type": "object",
+          "nullable": true
+        },
+        "backtest": {
+          "type": "object",
+          "nullable": true
+        },
+        "oos": {
+          "type": "object",
+          "nullable": true
+        },
+        "scan": {
+          "type": "object",
+          "nullable": true
+        },
+        "label": {
+          "type": "string",
+          "nullable": true
+        },
+        "expr": {
+          "type": "object",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "object",
+          "nullable": false
+        },
+        "summary": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    },
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "deleted": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/experiments/:p/pause": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "cooperative": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "message": {
+          "type": "string",
+          "nullable": true
+        },
+        "error": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/experiments/:p/rerun": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/experiments/:p/resume": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "cooperative": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "message": {
+          "type": "string",
+          "nullable": true
+        },
+        "error": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].kind": {
+          "type": "string",
+          "nullable": false
+        },
+        "kind": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].description": {
+          "type": "string",
+          "nullable": false
+        },
+        "description": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].versions": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].versions[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].versions[].factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].versions[].version": {
+          "type": "number",
+          "nullable": false
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].versions[].expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].versions[].model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].versions[].complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].versions[].oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "data[].versions[].stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "data[].versions[].complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "data[].versions[].version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "data[].versions[].human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "data[].versions[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].versions[].note": {
+          "type": "string",
+          "nullable": true
+        },
+        "note": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].versions[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].versions[].approved_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "versions": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "factor": {
+          "type": "object",
+          "nullable": false
+        },
+        "factor.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor.name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.kind": {
+          "type": "string",
+          "nullable": false
+        },
+        "kind": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.description": {
+          "type": "string",
+          "nullable": false
+        },
+        "description": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "factor.dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "dataset_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor.created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "version.id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version.factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version.version": {
+          "type": "number",
+          "nullable": false
+        },
+        "version.expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "version.model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "version.complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "version.oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version.stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version.complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version.version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version.human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version.status": {
+          "type": "string",
+          "nullable": false
+        },
+        "version.note": {
+          "type": "string",
+          "nullable": true
+        },
+        "note": {
+          "type": "string",
+          "nullable": true
+        },
+        "version.created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "version.approved_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/published": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].version_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].version": {
+          "type": "number",
+          "nullable": false
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "data[].approved_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/:p/versions": {
+    "POST": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "note": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/versions/:p/advance": {
+    "POST": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "note": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/versions/:p/revert": {
+    "POST": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "factor_id": {
+          "type": "number",
+          "nullable": false
+        },
+        "version": {
+          "type": "number",
+          "nullable": false
+        },
+        "expression": {
+          "type": "string",
+          "nullable": false
+        },
+        "model_ref": {
+          "type": "number",
+          "nullable": true
+        },
+        "latex": {
+          "type": "string",
+          "nullable": false
+        },
+        "complexity": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "train_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "val_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_rank_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "return_annual": {
+          "type": "number",
+          "nullable": true
+        },
+        "turnover": {
+          "type": "number",
+          "nullable": true
+        },
+        "stability": {
+          "type": "number",
+          "nullable": true
+        },
+        "oos_verified": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "stability_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "complexity_checked": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "version_released": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "human_approved": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "note": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "approved_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/analysis/correlation": {
+    "POST": {
+      "fields": {
+        "matrix": {
+          "type": "array(array)",
+          "nullable": false
+        },
+        "names": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "clusters": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "clusters[].members": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "members": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "threshold": {
+          "type": "number",
+          "nullable": false
+        },
+        "horizon": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/factors/analysis/ic-decay": {
+    "POST": {
+      "fields": {
+        "horizons": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "ic_means": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "half_life": {
+          "type": "number",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/factors/analysis/attribution": {
+    "POST": {
+      "fields": {
+        "industry_exposures": {
+          "type": "object",
+          "nullable": false
+        },
+        "size_exposure": {
+          "type": "number",
+          "nullable": true
+        },
+        "residual_ic": {
+          "type": "number",
+          "nullable": true
+        },
+        "n_periods": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/signals/catalog": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].category": {
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "desc": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].params": {
+          "type": "object",
+          "nullable": false
+        },
+        "params": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].rank": {
+          "type": "number",
+          "nullable": false
+        },
+        "rank": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/signals/events": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "data[].is_watchlist": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "is_watchlist": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data[].sector": {
+          "type": "string",
+          "nullable": false
+        },
+        "sector": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].period": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/signals/events/page": {
+    "GET": {
+      "fields": {
+        "items": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "items[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "items[].stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_code": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "stock_name": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "items[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "items[].is_watchlist": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "is_watchlist": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "items[].sector": {
+          "type": "string",
+          "nullable": false
+        },
+        "sector": {
+          "type": "string",
+          "nullable": false
+        },
+        "items[].triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "items[].as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "items[].scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "items[].period": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        },
+        "limit": {
+          "type": "number",
+          "nullable": false
+        },
+        "offset": {
+          "type": "number",
+          "nullable": false
+        },
+        "has_more": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "stats": {
+          "type": "object",
+          "nullable": false
+        },
+        "stats.today_new": {
+          "type": "number",
+          "nullable": false
+        },
+        "today_new": {
+          "type": "number",
+          "nullable": false
+        },
+        "stats.stock_count": {
+          "type": "number",
+          "nullable": false
+        },
+        "stock_count": {
+          "type": "number",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/signals/events/:p/timeline": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "signals": {
+          "type": "array(string)",
+          "nullable": true
+        },
+        "data[].status": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "evidence": {
+          "type": "object",
+          "nullable": true
+        },
+        "data[].triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "triggered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "as_of": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "scan_discovered_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/signals/scan/status": {
+    "GET": {
+      "fields": {
+        "last_scan_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "in_trading_session": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "periods": {
+          "type": "object",
+          "nullable": false
+        },
+        "schedule": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/signals/scan": {
+    "POST": {
+      "fields": {
+        "job_id": {
+          "type": "string",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/search": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].code": {
+          "type": "string",
+          "nullable": false
+        },
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].name": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/kline": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "dates": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "open": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "high": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "low": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "close": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "volume": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "amount": {
+          "type": "array(number)",
+          "nullable": false
+        },
+        "pct_change": {
+          "type": "array(number)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/quote": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "price": {
+          "type": "number",
+          "nullable": false
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "volume": {
+          "type": "number",
+          "nullable": false
+        },
+        "amount": {
+          "type": "number",
+          "nullable": false
+        },
+        "turnover_rate": {
+          "type": "number",
+          "nullable": false
+        },
+        "volume_ratio": {
+          "type": "number",
+          "nullable": false
+        },
+        "industry": {
+          "type": "string",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "timestamp": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/fundamental": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "name": {
+          "type": "string",
+          "nullable": false
+        },
+        "price": {
+          "type": "number",
+          "nullable": false
+        },
+        "pe": {
+          "type": "number",
+          "nullable": false
+        },
+        "pb": {
+          "type": "number",
+          "nullable": false
+        },
+        "market_cap": {
+          "type": "number",
+          "nullable": false
+        },
+        "float_cap": {
+          "type": "number",
+          "nullable": false
+        },
+        "turnover_rate": {
+          "type": "number",
+          "nullable": false
+        },
+        "pct_change": {
+          "type": "number",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/news": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].title": {
+          "type": "string",
+          "nullable": false
+        },
+        "title": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].url": {
+          "type": "string",
+          "nullable": false
+        },
+        "url": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].time": {
+          "type": "string",
+          "nullable": false
+        },
+        "time": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].source": {
+          "type": "string",
+          "nullable": false
+        },
+        "source": {
+          "type": "string",
+          "nullable": false
+        },
+        "cached": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/earnings": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": false
+        },
+        "eps": {
+          "type": "number",
+          "nullable": true
+        },
+        "revenue_yoy": {
+          "type": "number",
+          "nullable": true
+        },
+        "net_profit_yoy": {
+          "type": "number",
+          "nullable": true
+        },
+        "roe": {
+          "type": "number",
+          "nullable": true
+        },
+        "gross_margin": {
+          "type": "number",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/stocks/:p/financials": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": true
+        },
+        "prev_period": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/stocks/:p/financials/history": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "type": {
+          "type": "string",
+          "nullable": false
+        },
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/financials/latest": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": true
+        },
+        "balance": {
+          "type": "object",
+          "nullable": true
+        },
+        "income": {
+          "type": "object",
+          "nullable": true
+        },
+        "cash": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/stocks/:p/capital/history": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "type": {
+          "type": "string",
+          "nullable": false
+        },
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/stocks/:p/capital/latest": {
+    "GET": {
+      "fields": {
+        "code": {
+          "type": "string",
+          "nullable": false
+        },
+        "moneyflow": {
+          "type": "object",
+          "nullable": true
+        },
+        "lhb": {
+          "type": "object",
+          "nullable": true
+        },
+        "margin": {
+          "type": "object",
+          "nullable": true
+        },
+        "northbound": {
+          "type": "object",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/todos": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].id": {
+          "type": "number",
+          "nullable": false
+        },
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "data[].title": {
+          "type": "string",
+          "nullable": false
+        },
+        "title": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].completed": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "completed": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "data[].created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "data[].updated_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "POST": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "title": {
+          "type": "string",
+          "nullable": false
+        },
+        "completed": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/todos/:p": {
+    "PATCH": {
+      "fields": {
+        "id": {
+          "type": "number",
+          "nullable": false
+        },
+        "title": {
+          "type": "string",
+          "nullable": false
+        },
+        "completed": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "DELETE": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/system/deploy-status": {
+    "GET": {
+      "fields": {
+        "deployed_commit": {
+          "type": "string",
+          "nullable": true
+        },
+        "dist_commit": {
+          "type": "string",
+          "nullable": true
+        },
+        "dist_built_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_build_ok": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "last_build_at": {
+          "type": "string",
+          "nullable": true
+        },
+        "last_build_error_tail": {
+          "type": "string",
+          "nullable": true
+        },
+        "frontend_synced": {
+          "type": "boolean",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/system/config/runtime": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "data[].key": {
+          "type": "string",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].label": {
+          "type": "string",
+          "nullable": false
+        },
+        "label": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].type": {
+          "type": "string",
+          "nullable": false
+        },
+        "type": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].value": {
+          "type": "object",
+          "nullable": false
+        },
+        "value": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].default": {
+          "type": "object",
+          "nullable": false
+        },
+        "default": {
+          "type": "object",
+          "nullable": false
+        },
+        "data[].description": {
+          "type": "string",
+          "nullable": false
+        },
+        "description": {
+          "type": "string",
+          "nullable": false
+        },
+        "data[].apply": {
+          "type": "string",
+          "nullable": false
+        },
+        "apply": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    },
+    "PUT": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "key": {
+          "type": "string",
+          "nullable": false
+        },
+        "value": {
+          "type": "object",
+          "nullable": false
+        },
+        "default": {
+          "type": "object",
+          "nullable": false
+        },
+        "apply": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/system/cache-stats": {
+    "GET": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/system/exit": {
+    "POST": {
+      "fields": {
+        "ok": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "status": {
+          "type": "string",
+          "nullable": false
+        },
+        "reason": {
+          "type": "string",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/copilot/config": {
+    "GET": {
+      "fields": {
+        "base_url": {
+          "type": "string",
+          "nullable": false
+        },
+        "model": {
+          "type": "string",
+          "nullable": false
+        },
+        "configured": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "/copilot/commands/parse": {
+    "POST": {
+      "fields": {
+        "command": {
+          "type": "string",
+          "nullable": true
+        },
+        "mode": {
+          "type": "string",
+          "nullable": true
+        },
+        "filters": {
+          "type": "object",
+          "nullable": true
+        },
+        "filters.period": {
+          "type": "string",
+          "nullable": false
+        },
+        "period": {
+          "type": "string",
+          "nullable": false
+        },
+        "filters.time_range": {
+          "type": "string",
+          "nullable": false
+        },
+        "time_range": {
+          "type": "string",
+          "nullable": false
+        },
+        "filters.exclude_today": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "exclude_today": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "filters.sectors": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "sectors": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "filters.signal_types": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "signal_types": {
+          "type": "array(string)",
+          "nullable": false
+        },
+        "filters.signal_match": {
+          "type": "string",
+          "nullable": false
+        },
+        "signal_match": {
+          "type": "string",
+          "nullable": false
+        },
+        "filters.watchlist_only": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "watchlist_only": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "error": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "/copilot/hermes/status": {
+    "GET": {
+      "fields": {
+        "available": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "model": {
+          "type": "string",
+          "nullable": false
+        },
+        "configured": {
+          "type": "boolean",
+          "nullable": false
+        }
+      }
+    }
+  },
+  "_schemas": {
+    "DataResponse": {
+      "fields": {
+        "data": {
+          "type": "object",
+          "nullable": false
+        }
+      },
+      "kind": "envelope"
+    },
+    "ErrorResponse": {
+      "fields": {
+        "detail": {
+          "type": "string",
+          "nullable": false
+        }
+      },
+      "kind": "error"
+    },
+    "Paginated": {
+      "fields": {
+        "items": {
+          "type": "array(object)",
+          "nullable": false
+        },
+        "total": {
+          "type": "number",
+          "nullable": false
+        }
+      },
+      "kind": "pagination"
+    }
+  },
+  "_meta": {
+    "paths_total": 128,
+    "paths_with_schema": 98,
+    "schema_defs": 3
+  }
+}

@@ -1,0 +1,43 @@
+/* ===== 表达式 IDE（ExprEditor，CodeMirror 6 容器外观） =====
+ * 主题色全部走 --sr-* 令牌（亮/暗自动切换），与 Mantine Textarea 输入框观感一致：
+ * 细边框 + 圆角 + focus 高亮；补全浮层 / 占位符沿用卡片与文字令牌。 */
+.sr-expr-editor {
+  min-height: var(--sr-expr-min-h, 3.2em);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-block-bg);
+  overflow: hidden;
+  transition: border-color var(--sr-dur-fast) ease, box-shadow var(--sr-dur-fast) ease;
+}
+.sr-expr-editor:focus-within {
+  border-color: var(--sr-accent);
+  box-shadow: 0 0 0 1px var(--sr-accent);
+}
+.sr-expr-editor .cm-editor {
+  min-height: var(--sr-expr-min-h, 3.2em);
+}
+.sr-expr-editor .cm-scroller {
+  line-height: 1.6;
+}
+.sr-expr-editor .cm-placeholder {
+  color: var(--sr-text-3);
+}
+/* 补全浮层（CodeMirror 默认挂载于编辑器内，令牌跟随主题） */
+.sr-expr-editor .cm-tooltip {
+  background: var(--sr-card-bg);
+  color: var(--sr-text-1);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  box-shadow: var(--sr-float-shadow);
+  overflow: hidden;
+}
+.sr-expr-editor .cm-tooltip-autocomplete ul li {
+  padding: 2px 10px;
+}
+.sr-expr-editor .cm-tooltip-autocomplete ul li[aria-selected] {
+  background: var(--sr-hover-bg);
+  color: var(--sr-accent);
+}
+.sr-expr-editor .cm-tooltip-autocomplete .cm-completionDetail {
+  color: var(--sr-text-3);
+}

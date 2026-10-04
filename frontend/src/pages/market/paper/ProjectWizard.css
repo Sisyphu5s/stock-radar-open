@@ -1,0 +1,30 @@
+/* ============================================================
+   三步创建向导(ProjectWizard.tsx)局部样式(Modal 内 Stepper + 内容区 + 底部操作)。
+   T-44 从 paper.css 拆分。
+   ============================================================ */
+
+.sr-paper-wizard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-page);
+  min-width: 0;
+  padding-top: var(--sr-pad-lg);
+}
+.sr-paper-wizard-body {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.sr-paper-wizard-label {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-2);
+  margin-bottom: var(--sr-pad-xs);
+}
+.sr-paper-wizard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+}

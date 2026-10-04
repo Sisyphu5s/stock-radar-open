@@ -1,0 +1,88 @@
+/* ============================================================
+   参数摘要条(ParamSummary.tsx)局部样式:T-44 从 paper.css 拆分。
+   ============================================================ */
+
+/* ---- 参数摘要条:chip 行(默认态)/ 内联编辑表单(编辑态) ---- */
+.sr-paper-summary {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sr-gap-row);
+  min-width: 0;
+  padding: var(--sr-card-pad);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-card);
+  background: var(--sr-card-bg);
+}
+.sr-paper-summary-view {
+  min-width: 0;
+}
+.sr-paper-summary-chips {
+  font-size: var(--sr-font-sm);
+  color: var(--sr-text-1);
+  font-variant-numeric: tabular-nums;
+  white-space: normal;
+  min-width: 0;
+}
+
+/* 编辑态按钮行 */
+.sr-paper-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* 多股项目编辑态股票只读行(股票不可改,Tags 展示 + 说明) */
+.sr-paper-stock-readonly {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sr-gap-ctl);
+  min-width: 0;
+  padding: var(--sr-pad-sm) var(--sr-pad-md);
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius-ctl);
+  background: var(--sr-block-bg);
+}
+
+/* 实验任务运行条:进度 + 暂停/恢复/取消(运行态替换「运行实验」主按钮) */
+.sr-paper-runbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* ---- 实时监控状态区(摘要条内) ---- */
+.sr-paper-watch-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.sr-paper-watch-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  flex-wrap: wrap;
+  min-width: 0;
+  font-size: var(--sr-font-xs);
+  color: var(--sr-text-2);
+}
+.sr-paper-watch-error {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sr-gap-ctl);
+  color: var(--sr-warning);
+  font-size: var(--sr-font-xs);
+}
+
+@media (max-width: 768px) {
+  .sr-paper-actions {
+    width: 100%;
+  }
+}

@@ -1,0 +1,50 @@
+/* ============================================================
+   分析面板滚动流（InspectorPanel 组件专属，自 stock.css 迁入）：
+   sticky 锚点条 + 五个 section 纵向连续
+   ============================================================ */
+
+/* ===== 分析面板（K 线下方 InspectorPanel）文本密度 =====
+   行内 label/value、段落文字统一 line-height 1.7 提升可读性；
+   仅命中面板 section 卡片内容区文本（Mantine Text），不动 K 线工具条 / 头部 / 卡片标题 */
+.sr-wb-inspector .sr-wb-sec .sr-wb-sec-text {
+  line-height: 1.7;
+}
+
+/* ===== 滚动流：sticky 锚点条 + 五个 section 纵向连续 =====
+   锚点条吸附滚动容器顶部：不透明背景盖住滚动内容，border-bottom 与内容区分隔；窄容器横向滚动 */
+/* 锚点条实际高度单一事实源：按钮 24 + padding-bottom(--sr-pad-sm) + border-bottom 1px + margin-bottom(--sr-pad-sm)，
+   定义在滚动容器作用域——锚点条自身（sticky 覆盖高）与 section 落点（scroll-margin-top）共用；
+   亮/暗主题 --sr-pad-sm 收缩由 CSS calc 自动适配（TS 侧不再双写常量） */
+.sr-wb-inspector {
+  --sr-wb-anchor-h: calc(24px + var(--sr-pad-sm) + 1px + var(--sr-pad-sm));
+}
+.sr-wb-anchor {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  /* 锚点条为 InspectorPanel(flex column 滚动容器)的 flex item：因其 overflow-x 非 visible，
+     flex 自动最小高度归零 + 默认 flex-shrink:1，五个 section 超高时会被压缩到只剩一半
+     (滚动条又被隐藏 → 视觉上「只剩一半」)。置 0 保自然高度，滚动压力落到 section 上。 */
+  flex-shrink: 0;
+  gap: var(--sr-pad-sm);
+  padding: 0 0 var(--sr-pad-sm);
+  margin-bottom: var(--sr-pad-sm);
+  border-bottom: 1px solid var(--sr-border);
+  background: var(--sr-card-bg);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sr-wb-anchor::-webkit-scrollbar { display: none; }
+/* 锚点按钮不参与收缩：窄容器下整条横向滚动，不换行 */
+.sr-wb-anchor .sr-wb-anchor-btn { flex-shrink: 0; }
+/* section 落点偏移 = 锚点条高 + 8px 冗余（防密度/折行变化）：scrollIntoView 后标题不被 sticky 条遮挡，
+   与 InspectorPanel IO rootMargin 顶部安全值联动（TS 侧注释见 InspectorPanel.tsx） */
+.sr-wb-sec {
+  scroll-margin-top: calc(var(--sr-wb-anchor-h) + 8px);
+}
+.sr-wb-sec + .sr-wb-sec {
+  margin-top: var(--sr-gap-card);
+}
